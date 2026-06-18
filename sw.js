@@ -1,4 +1,4 @@
-const CACHE = "yayin-panosu-v2";
+const CACHE = "yayin-panosu-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -23,6 +23,10 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
+
+  const u = new URL(req.url);
+  // Firebase/Google backend (Firestore real-time, auth): never cache/intercept
+  if (u.hostname.endsWith("googleapis.com") || u.hostname.endsWith("firebaseio.com") || u.hostname.endsWith("firebase.googleapis.com")) return;
 
   const isHTML = req.mode === "navigate" || req.destination === "document";
 
