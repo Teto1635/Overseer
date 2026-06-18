@@ -94,6 +94,10 @@
   .chmeta{font-family:var(--mono);font-size:11px;color:var(--faint);border-top:1px solid var(--line);padding-top:8px}
   .vids{margin-top:10px;display:flex;flex-direction:column;gap:8px}
   .empty{color:var(--faint);font-size:13px;padding:18px 0;text-align:center}
+  .secthead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-top:12px}
+  .sectlabel{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+  .sectcount{font-family:var(--mono);font-size:11px;color:var(--faint);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+  .sectchev{color:var(--muted);font-size:13px;flex:0 0 auto}
   .row{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px}
   .row.overdue{border-color:rgba(248,113,113,.4)}
   .rtop{display:flex;align-items:center;gap:8px}
@@ -112,6 +116,71 @@
   .ibtn:disabled{color:var(--faint);opacity:.4}
   .ibtn.danger{color:var(--red)}
   .overtxt{font-family:var(--mono);font-size:11px;color:var(--red);margin-top:7px}
+  .badge{min-height:28px;padding:0 9px;border-radius:7px;border:1px solid var(--line);background:var(--panel);font-size:11px;font-weight:700;display:inline-flex;align-items:center;flex:0 0 auto}
+  .badge.note{color:var(--blue);border-color:rgba(94,160,255,.45)}
+  .badge.link{color:var(--green);border-color:rgba(52,211,153,.45)}
+  .chev{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:13px;margin-left:4px;flex:0 0 auto}
+  .vdetail{margin-top:10px;border-top:1px solid var(--line);padding-top:10px;display:none}
+  .vdetail.open{display:block}
+  .vdetail label{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:5px}
+  .vinput{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 10px;margin-bottom:10px}
+  .vnote{width:100%;min-height:64px;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 10px;resize:vertical;font-family:inherit;line-height:1.4}
+  .vdrow{display:flex;gap:8px;margin-bottom:10px}
+  .vbtn{flex:1;min-height:40px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-weight:700;font-size:13px}
+  .vbtn.g{border-color:rgba(52,211,153,.5);color:var(--green)}
+  .vbtn.b{border-color:rgba(94,160,255,.5);color:var(--blue)}
+  .modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.open{display:flex}
+  .modalbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:520px;width:100%;max-height:78vh;overflow:auto}
+  .modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
+  .modalhead span{font-weight:800;font-size:16px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .modalhead button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);flex:0 0 auto}
+  .modalbody{padding:16px;white-space:pre-wrap;line-height:1.5;color:var(--text);font-size:15px}
+  .bulkbtn{width:100%;min-height:42px;border-radius:11px;border:1px solid var(--amber);background:rgba(240,180,41,.10);color:var(--amber);font-weight:700;font-size:13px;margin-top:10px}
+  .fld{margin-bottom:14px}
+  .fld>label{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:7px}
+  .seg{display:flex;gap:6px}
+  .seg button{flex:1;min-height:42px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-weight:700;font-size:12px}
+  .seg button.on{border-color:var(--amber);background:rgba(240,180,41,.14);color:var(--amber)}
+  .days{display:flex;gap:5px}
+  .day{flex:1;min-width:0;min-height:42px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-weight:700;font-size:12px;padding:0}
+  .day.on{border-color:var(--blue);background:rgba(94,160,255,.16);color:var(--blue)}
+  .fsel{width:100%;min-height:44px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:0 10px;font-size:15px}
+  .fdate{width:100%;min-height:44px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:0 10px;font-family:var(--mono);font-size:14px}
+  .frow2{display:flex;gap:10px}
+  .frow2>div{flex:1;min-width:0}
+  .prev{font-size:13px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px;margin-bottom:12px;line-height:1.4}
+  .prev b{color:var(--amber);font-family:var(--mono)}
+  .applybtn{width:100%;min-height:48px;border-radius:12px;border:none;background:var(--amber);color:#1A1400;font-weight:800;font-size:15px}
+  .colorrow{display:flex;align-items:center;gap:10px}
+  .colordot{width:26px;height:26px;border-radius:999px;flex:0 0 auto;border:2px solid rgba(255,255,255,.18);padding:0}
+  .swatches{display:flex;flex-wrap:wrap;gap:14px;padding:6px;justify-content:center}
+  .swatch{width:48px;height:48px;border-radius:999px;border:3px solid transparent;padding:0}
+  .swatch.on{border-color:#fff}
+  .tabdot{width:9px;height:9px;border-radius:999px;display:inline-block;margin-right:7px;vertical-align:middle}
+  .chdot{width:7px;height:7px;border-radius:999px;display:inline-block;margin-right:6px;vertical-align:middle}
+  .brkrow{display:flex;flex-direction:column;gap:5px;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);margin-bottom:8px}
+  .brkrow:last-child{margin-bottom:0}
+  .brktop{display:flex;align-items:center;gap:9px}
+  .brkdot{width:10px;height:10px;border-radius:999px;flex:0 0 auto}
+  .brkname{font-weight:700;font-size:15px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .brknext{font-family:var(--mono);font-size:11px;color:var(--muted);flex:0 0 auto}
+  .brkstats{font-family:var(--mono);font-size:12px;color:var(--muted);padding-left:19px}
+  .brkstats .od{color:var(--red)}
+  .temposum{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .temposum b{color:var(--green);font-family:var(--mono)}
+  .tempobars{display:flex;align-items:flex-end;gap:6px;height:92px}
+  .tcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .tcount{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1}
+  .tbar{width:100%;background:var(--green);border-radius:5px 5px 0 0;min-height:3px}
+  .tbar.zero{background:var(--line)}
+  .tlabels{display:flex;gap:6px;margin-top:6px}
+  .tlab{flex:1;text-align:center;font-family:var(--mono);font-size:9px;color:var(--faint)}
+  .iconbtn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .drag{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--faint);font-size:16px;touch-action:none}
+  .row.dragging{opacity:.96;box-shadow:0 10px 26px rgba(0,0,0,.55);border-color:var(--amber)}
+  .sres{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);margin-bottom:6px}
+  .srest{font-family:var(--mono);font-size:11px;flex:0 0 auto}
   .addbtn{margin-top:12px;width:100%;min-height:46px;border-radius:12px;border:1px dashed var(--line);background:var(--panel2);color:var(--amber);font-weight:700;font-size:14px}
 
   /* backup */
@@ -140,7 +209,10 @@
       <div class="brand">OVERSEER</div>
       <div class="h1">Yayın Panosu</div>
     </div>
-    <div class="savedAt" id="savedAt">kayıt yok</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="iconbtn" id="searchBtn" aria-label="Ara"></button>
+      <div class="savedAt" id="savedAt">kayıt yok</div>
+    </div>
   </header>
 
   <div class="viewtabs">
@@ -159,7 +231,13 @@
     <div class="pad"><div class="label">Kapasite</div></div>
     <div class="card" id="capCard"></div>
 
-    <div class="pad"><div class="label">Yayın Takvimi · tüm kanallar</div></div>
+    <div class="pad"><div class="label">Yayın temposu · son 8 hafta</div></div>
+    <div class="card" id="tempoCard"></div>
+
+    <div class="pad"><div class="label">Kanal kırılımı</div></div>
+    <div class="card" id="brkCard"></div>
+
+    <div class="pad"><div class="label">Sıradaki 5 Yayın · tüm kanallar</div></div>
     <div class="card" id="calCard"></div>
 
     <div class="pad"><div class="label">Yedek</div></div>
@@ -175,11 +253,13 @@
 
   <div class="savebar"><button class="savebtn" id="saveBtn">Kaydet</button></div>
   <div class="toast" id="toast"></div>
+  <div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><span id="modalTitle"></span><button id="modalClose">✕</button></div><div class="modalbody" id="modalBody"></div></div></div>
 
 <script>
 "use strict";
 const KEY = "yayin-panosu-v1";
 const uid = () => Math.random().toString(36).slice(2,9);
+const PALETTE=["#F0B429","#5EA0FF","#34D399","#A78BFA","#F472B6","#FB923C","#22D3EE","#F87171"];
 
 const pad = n => String(n).padStart(2,"0");
 const toYMD = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -191,15 +271,15 @@ const fmtDate = ymd => {if(!ymd)return"—";const[y,m,dd]=ymd.split("-");return 
 
 function defaultState(){
   return {
-    channels:Array.from({length:5},(_,i)=>({id:uid(),name:`Kanal ${i+1}`,videos:[]})),
+    channels:Array.from({length:5},(_,i)=>({id:uid(),name:`Kanal ${i+1}`,videos:[],color:PALETTE[i%PALETTE.length]})),
     settings:{hoursPerVideo:6,hoursPerDay:6}
   };
 }
 function migrate(s){
   s=s||{};
-  s.channels=(s.channels||[]).map(c=>({
-    id:c.id||uid(), name:c.name||"Kanal",
-    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||""}))
+  s.channels=(s.channels||[]).map((c,idx)=>({
+    id:c.id||uid(), name:c.name||"Kanal", color:c.color||PALETTE[idx%PALETTE.length],
+    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||"",link:v.link||"",note:v.note||"",publishedAt:v.publishedAt||""}))
   }));
   if(s.channels.length===0) s.channels=defaultState().channels;
   s.settings=Object.assign({hoursPerVideo:6,hoursPerDay:6}, s.settings||{});
@@ -310,51 +390,47 @@ function capRow(label,need,cap){
   return wrap;
 }
 
-// ---- calendar (cross-channel) ----
+// ---- next 5 (cross-channel) ----
 function renderCalendar(){
-  const t=todayStr();const[,wkE]=weekRange();
-  const items=[];
+  const t=todayStr();
+  const dated=[]; let undated=0;
   state.channels.forEach((c,ci)=>c.videos.forEach(v=>{
     if(v.status==="published")return;
-    items.push({ci,ch:c.name,title:v.title,date:v.date});
+    if(v.date) dated.push({ci,ch:c.name,title:v.title,date:v.date});
+    else undated++;
   }));
-  const byDate=(a,b)=>a.date<b.date?-1:a.date>b.date?1:0;
-  const overdue=items.filter(i=>i.date&&i.date<t).sort(byDate);
-  const week=items.filter(i=>i.date&&i.date>=t&&i.date<=wkE).sort(byDate);
-  const later=items.filter(i=>i.date&&i.date>wkE).sort(byDate);
-  const undated=items.filter(i=>!i.date);
+  dated.sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+  const next=dated.slice(0,5);
 
   const card=document.getElementById("calCard");card.innerHTML="";
-  if(items.length===0){const e=document.createElement("div");e.className="calempty";e.textContent="Yayınlanacak video yok.";card.appendChild(e);return;}
-
-  addGroup(card,"Geciken",overdue,cssVar("--red"));
-  addGroup(card,"Bu hafta",week,cssVar("--amber"));
-  addGroup(card,"Sonra",later,cssVar("--blue"));
-  addGroup(card,"Tarihsiz",undated,cssVar("--faint"));
-}
-function addGroup(card,title,arr,color){
-  if(arr.length===0)return;
-  const t=todayStr();
-  const g=document.createElement("div");g.className="calgroup";
-  const h=document.createElement("div");h.className="caltitle";h.style.color=color;
-  h.appendChild(document.createTextNode(title));
-  const c=document.createElement("span");c.className="calcount";c.textContent=arr.length;h.appendChild(c);
-  g.appendChild(h);
-  arr.forEach(it=>{
+  if(next.length===0){
+    const e=document.createElement("div");e.className="calempty";
+    e.textContent=undated>0?`Tarihli yayın yok · ${undated} tarihsiz video`:"Yayınlanacak video yok.";
+    card.appendChild(e);return;
+  }
+  next.forEach(it=>{
     const row=document.createElement("div");row.className="calrow";
-    const od=it.date&&it.date<t;
+    const od=it.date<t;
     const dot=document.createElement("span");dot.className="caldot";
     dot.style.background=od?cssVar("--red"):it.date===t?cssVar("--amber"):cssVar("--blue");
     const dt=document.createElement("span");dt.className="caldate"+(od?" red":"");dt.textContent=fmtDate(it.date);
     const mid=document.createElement("div");mid.className="calmid";
-    const ch=document.createElement("div");ch.className="calch";ch.textContent=it.ch;
+    const ch=document.createElement("div");ch.className="calch";
+    const cd=document.createElement("span");cd.className="chdot";cd.style.background=(state.channels[it.ci]&&state.channels[it.ci].color)||"#888";
+    ch.appendChild(cd);ch.appendChild(document.createTextNode(it.ch));
     const vd=document.createElement("div");vd.className="calvid";vd.textContent=it.title;
     mid.appendChild(ch);mid.appendChild(vd);
     row.appendChild(dot);row.appendChild(dt);row.appendChild(mid);
     row.onclick=()=>goToChannel(it.ci);
-    g.appendChild(row);
+    card.appendChild(row);
   });
-  card.appendChild(g);
+  const extra=dated.length-next.length;
+  if(extra>0||undated>0){
+    const f=document.createElement("div");f.className="note";
+    const parts=[];if(extra>0)parts.push(`+${extra} sonraki`);if(undated>0)parts.push(`${undated} tarihsiz`);
+    f.textContent=parts.join(" · ")+" — Kanallar'da";
+    card.appendChild(f);
+  }
 }
 
 // ---- backup ----
@@ -411,57 +487,250 @@ function applyImport(text){
   state=migrate(ns);activeCh=0;save(true);renderAll();flash("Yedek yüklendi");
 }
 
+// ---- video detail helpers ----
+const expandedIds=new Set();
+function studioUrl(link){
+  if(!link)return null;link=link.trim();if(!link)return null;
+  if(/studio\.youtube\.com/.test(link))return link;
+  const m=link.match(/[?&]v=([\w-]{11})/)||link.match(/youtu\.be\/([\w-]{11})/)||link.match(/shorts\/([\w-]{11})/)||link.match(/\/video\/([\w-]{11})/)||link.match(/\/live\/([\w-]{11})/);
+  if(m)return "https://studio.youtube.com/video/"+m[1]+"/edit";
+  if(/^[\w-]{11}$/.test(link))return "https://studio.youtube.com/video/"+link+"/edit";
+  return link;
+}
+function openStudio(link){const u=studioUrl(link);if(!u){flash("Link yok",true);return;}window.open(u,"_blank");}
+function escapeICS(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+function downloadICS(ch,v){
+  if(!v.date){flash("Önce tarih gir",true);return;}
+  const[y,m,d]=v.date.split("-");
+  const start=`${y}${m}${d}T190000`,end=`${y}${m}${d}T193000`;
+  const stamp=new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
+  const desc=v.link?(studioUrl(v.link)||v.link):"Yayın günü";
+  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//YayinPanosu//TR","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+    "UID:"+v.id+"@yayinpanosu","DTSTAMP:"+stamp,"DTSTART:"+start,"DTEND:"+end,
+    "SUMMARY:"+escapeICS("Yayın: "+v.title+" ("+ch.name+")"),
+    "DESCRIPTION:"+escapeICS(desc),
+    "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:Yayın","TRIGGER:-PT1H","END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const fname=("yayin-"+(v.title||"video")).replace(/[^\w-]+/g,"_").slice(0,40)+".ics";
+  const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
+  try{const f=new File([blob],fname,{type:"text/calendar"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:fname}).catch(()=>{});return;}}catch(e){}
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  flash("Takvim dosyası oluştu");
+}
+function showNote(v){openModal(v.title||"Not", v.note||"(boş)");}
+function openModal(title,text){document.getElementById("modalTitle").textContent=title;const b=document.getElementById("modalBody");b.innerHTML="";b.textContent=text;document.getElementById("modal").classList.add("open");}
+function openModalNode(title,node){document.getElementById("modalTitle").textContent=title;const b=document.getElementById("modalBody");b.innerHTML="";b.appendChild(node);document.getElementById("modal").classList.add("open");}
+function closeModal(){document.getElementById("modal").classList.remove("open");}
+
+// ---- auto date distribution ----
+function autoDateCompute(cfg){
+  const ch=state.channels[cfg.ci];
+  const planned=ch.videos.map((v,i)=>({v,i})).filter(o=>o.v.status!=="published");
+  let targets;
+  if(cfg.pattern==="odd") targets=planned.filter((o,k)=>k%2===0);
+  else if(cfg.pattern==="even") targets=planned.filter((o,k)=>k%2===1);
+  else targets=planned;
+  const occ=[];
+  if(cfg.start&&cfg.end&&cfg.days.size){
+    const[sy,sm,sd]=cfg.start.split("-").map(Number);
+    const[ey,em,ed]=cfg.end.split("-").map(Number);
+    let cur=new Date(sy,sm-1,sd);const end=new Date(ey,em-1,ed);let guard=0;
+    while(cur<=end&&guard<3000){if(cfg.days.has(cur.getDay()))occ.push(toYMD(cur));cur.setDate(cur.getDate()+1);guard++;}
+  }
+  return {targets,occ,assignCount:Math.min(targets.length,occ.length)};
+}
+function autoDateApply(cfg){
+  const r=autoDateCompute(cfg);
+  if(r.assignCount===0){flash("Atanacak bir şey yok",true);return;}
+  if(!confirm(`${r.assignCount} videoya tarih atanacak (yayınlanmışlara dokunulmaz). Devam?`))return;
+  const ch=state.channels[cfg.ci];
+  for(let k=0;k<r.assignCount;k++) ch.videos[r.targets[k].i].date=r.occ[k];
+  activeCh=cfg.ci;collapsed.planned=false;
+  closeModal();renderTabs();renderPanel();refreshOverview();save(true);
+  flash(r.assignCount+" videoya tarih atandı");
+}
+function fieldWrap(label){const f=document.createElement("div");f.className="fld";const l=document.createElement("label");l.textContent=label;f.appendChild(l);return f;}
+function openAutoDateModal(defaultCi){
+  const cfg={pattern:"all",ci:defaultCi,days:new Set(),start:"",end:""};
+  const wrap=document.createElement("div");
+
+  const f1=fieldWrap("Kalıp");const seg=document.createElement("div");seg.className="seg";
+  [["odd","Tek 1,3,5…"],["even","Çift 2,4,6…"],["all","Tümü"]].forEach(([k,tx])=>{
+    const b=document.createElement("button");b.textContent=tx;b.className=cfg.pattern===k?"on":"";
+    b.onclick=()=>{cfg.pattern=k;[...seg.children].forEach(c=>c.className="");b.className="on";upd();};
+    seg.appendChild(b);
+  });
+  f1.appendChild(seg);wrap.appendChild(f1);
+
+  const f2=fieldWrap("Kanal");const sel=document.createElement("select");sel.className="fsel";
+  state.channels.forEach((c,i)=>{const o=document.createElement("option");o.value=i;o.textContent=c.name;if(i===defaultCi)o.selected=true;sel.appendChild(o);});
+  sel.onchange=()=>{cfg.ci=Number(sel.value);upd();};
+  f2.appendChild(sel);wrap.appendChild(f2);
+
+  const f3=fieldWrap("Yayın günleri");const days=document.createElement("div");days.className="days";
+  [[1,"Pzt"],[2,"Sal"],[3,"Çar"],[4,"Per"],[5,"Cum"],[6,"Cmt"],[0,"Paz"]].forEach(([d,tx])=>{
+    const b=document.createElement("button");b.className="day";b.textContent=tx;
+    b.onclick=()=>{if(cfg.days.has(d)){cfg.days.delete(d);b.classList.remove("on");}else{cfg.days.add(d);b.classList.add("on");}upd();};
+    days.appendChild(b);
+  });
+  f3.appendChild(days);wrap.appendChild(f3);
+
+  const f4=fieldWrap("Tarih aralığı");const r2=document.createElement("div");r2.className="frow2";
+  const sIn=document.createElement("input");sIn.type="date";sIn.className="fdate";sIn.onchange=()=>{cfg.start=sIn.value;upd();};
+  const eIn=document.createElement("input");eIn.type="date";eIn.className="fdate";eIn.onchange=()=>{cfg.end=eIn.value;upd();};
+  const sd=document.createElement("div");sd.appendChild(mini("Başlangıç"));sd.appendChild(sIn);
+  const ed=document.createElement("div");ed.appendChild(mini("Bitiş"));ed.appendChild(eIn);
+  r2.appendChild(sd);r2.appendChild(ed);f4.appendChild(r2);wrap.appendChild(f4);
+
+  const prev=document.createElement("div");prev.className="prev";wrap.appendChild(prev);
+  const apply=document.createElement("button");apply.className="applybtn";apply.textContent="Uygula";apply.onclick=()=>autoDateApply(cfg);
+  wrap.appendChild(apply);
+
+  function mini(t){const s=document.createElement("div");s.style.cssText="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:4px";s.textContent=t;return s;}
+  function upd(){
+    if(!cfg.start||!cfg.end||cfg.days.size===0){prev.innerHTML="Kalıp, gün ve tarih aralığı seç.";return;}
+    const r=autoDateCompute(cfg);
+    let h=`${r.targets.length} hedef · ${r.occ.length} uygun gün → <b>${r.assignCount}</b> videoya atanır`;
+    if(r.targets.length>r.occ.length) h+=` · ${r.targets.length-r.occ.length} video boş kalır`;
+    prev.innerHTML=h;
+  }
+  openModalNode("Toplu tarih ata",wrap);upd();
+}
+
 // ---- channels ----
 function renderTabs(){
   const wrap=document.getElementById("tabs");wrap.innerHTML="";
   state.channels.forEach((c,i)=>{
     const b=document.createElement("button");b.className="tab"+(i===activeCh?" active":"");
-    b.appendChild(document.createTextNode(c.name||" "));
+    const d=document.createElement("span");d.className="tabdot";d.style.background=c.color||"#888";
+    const lab=document.createElement("span");lab.className="tablabel";lab.textContent=c.name||" ";
+    b.appendChild(d);b.appendChild(lab);
     const cnt=c.videos.filter(v=>v.status==="planned").length;
     if(cnt>0){const s=document.createElement("span");s.className="c";s.textContent=cnt;b.appendChild(s);}
     b.onclick=()=>{activeCh=i;renderTabs();renderPanel();};
     wrap.appendChild(b);
   });
 }
+const collapsed={published:true,planned:false};
+function sectHeader(label,count,key,color){
+  const h=document.createElement("button");h.className="secthead";
+  const left=document.createElement("span");left.style.cssText="display:flex;gap:8px;align-items:center;min-width:0";
+  const l=document.createElement("span");l.className="sectlabel";l.style.color=color;l.textContent=label;
+  const c=document.createElement("span");c.className="sectcount";c.textContent=count;
+  left.appendChild(l);left.appendChild(c);
+  const cv=document.createElement("span");cv.className="sectchev";cv.textContent=collapsed[key]?"⌄":"⌃";
+  h.appendChild(left);h.appendChild(cv);
+  h.onclick=()=>{collapsed[key]=!collapsed[key];renderPanel();};
+  return h;
+}
 function renderPanel(){
   const ch=state.channels[activeCh];
   const panel=document.getElementById("panel");panel.innerHTML="";
+  const nameRow=document.createElement("div");nameRow.className="colorrow";
+  const cdot=document.createElement("button");cdot.className="colordot";cdot.style.background=ch.color||"#888";cdot.onclick=()=>openColorModal(activeCh);
   const name=document.createElement("input");name.className="chname";name.value=ch.name;name.placeholder="Kanal adı";
-  name.oninput=()=>{ch.name=name.value;const tab=document.querySelectorAll("#tabs .tab")[activeCh];if(tab)tab.childNodes[0].nodeValue=name.value||" ";autosave();};
-  panel.appendChild(name);
-  const planned=ch.videos.filter(v=>v.status==="planned").length;
+  name.oninput=()=>{ch.name=name.value;const tab=document.querySelectorAll("#tabs .tab")[activeCh];if(tab){const t=tab.querySelector(".tablabel");if(t)t.textContent=name.value||" ";}autosave();};
+  nameRow.appendChild(cdot);nameRow.appendChild(name);
+  panel.appendChild(nameRow);
+
+  const plannedArr=ch.videos.map((v,i)=>({v,i})).filter(o=>o.v.status!=="published");
+  const publishedArr=ch.videos.map((v,i)=>({v,i})).filter(o=>o.v.status==="published");
+
   const meta=document.createElement("div");meta.className="chmeta";
-  meta.textContent=`${ch.videos.length} video · ${planned} yayınlanacak · ${ch.videos.length-planned} yayında`;
+  meta.textContent=`${ch.videos.length} video · ${plannedArr.length} yayınlanacak · ${publishedArr.length} yayında`;
   panel.appendChild(meta);
-  const vids=document.createElement("div");vids.className="vids";
-  if(ch.videos.length===0){const e=document.createElement("div");e.className="empty";e.textContent="Henüz video yok. Aşağıdan ekle.";vids.appendChild(e);}
-  ch.videos.forEach((v,vi)=>vids.appendChild(videoRow(ch,v,vi)));
-  panel.appendChild(vids);
-  const add=document.createElement("button");add.className="addbtn";add.textContent="+ Video ekle";
-  add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:""});renderPanel();renderTabs();refreshOverview();autosave();};
-  panel.appendChild(add);
+
+  if(publishedArr.length){
+    panel.appendChild(sectHeader("Yayınlanan",publishedArr.length,"published",cssVar("--green")));
+    if(!collapsed.published){
+      const wrap=document.createElement("div");wrap.className="vids";
+      publishedArr.slice().sort((a,b)=>(b.v.date||"").localeCompare(a.v.date||"")).forEach(o=>wrap.appendChild(videoRow(ch,o.v,o.i,{group:"published"})));
+      panel.appendChild(wrap);
+    }
+  }
+
+  panel.appendChild(sectHeader("Yayınlanacak",plannedArr.length,"planned",cssVar("--amber")));
+  if(!collapsed.planned){
+    if(plannedArr.length){const bd=document.createElement("button");bd.className="bulkbtn";bd.textContent="⚡ Toplu tarih ata";bd.onclick=()=>openAutoDateModal(activeCh);panel.appendChild(bd);}
+    const wrap=document.createElement("div");wrap.className="vids";
+    if(plannedArr.length===0){const e=document.createElement("div");e.className="empty";e.textContent="Yayınlanacak video yok.";wrap.appendChild(e);}
+    plannedArr.forEach((o,k)=>wrap.appendChild(videoRow(ch,o.v,o.i,{group:"planned",pos:k,planned:plannedArr})));
+    panel.appendChild(wrap);
+    const add=document.createElement("button");add.className="addbtn";add.textContent="+ Video ekle";
+    add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:"",link:"",note:"",publishedAt:""});collapsed.planned=false;renderPanel();renderTabs();refreshOverview();autosave();};
+    panel.appendChild(add);
+  }
 }
-function videoRow(ch,v,vi){
-  const t=todayStr();const pub=v.status==="published";const overdue=!pub&&v.date&&v.date<t;
-  const dotColor=pub?cssVar("--green"):overdue?cssVar("--red"):cssVar("--amber");
-  const row=document.createElement("div");row.className="row"+(overdue?" overdue":"");
+function videoRow(ch,v,arrIdx,opts){
+  opts=opts||{};const grp=opts.group||"planned";
+  const pub=v.status==="published";
+  const row=document.createElement("div");row.className="row";row.id="vid-"+v.id;
+  const isOpen=expandedIds.has(v.id);
+
   const rtop=document.createElement("div");rtop.className="rtop";
-  const idx=document.createElement("span");idx.className="idx";idx.textContent="#"+(vi+1);
-  const dot=document.createElement("span");dot.className="dot";dot.style.background=dotColor;
+  const idx=document.createElement("span");idx.className="idx";
+  if(grp==="published"){idx.textContent="✓";idx.style.color=cssVar("--green");}
+  else idx.textContent="#"+((opts.pos||0)+1);
+  const dot=document.createElement("span");dot.className="dot";
   const title=document.createElement("input");title.className="vtitle"+(pub?" pub":"");title.value=v.title;title.placeholder="Video adı";
   title.oninput=()=>{v.title=title.value;autosave();};
-  rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);row.appendChild(rtop);
+  const linkBadge=document.createElement("button");linkBadge.className="badge link";linkBadge.textContent="link";linkBadge.onclick=()=>openStudio(v.link);
+  const noteBadge=document.createElement("button");noteBadge.className="badge note";noteBadge.textContent="not";noteBadge.onclick=()=>showNote(v);
+  const updBadges=()=>{linkBadge.style.display=(v.link&&v.link.trim())?"inline-flex":"none";noteBadge.style.display=(v.note&&v.note.trim())?"inline-flex":"none";};
+  const chev=document.createElement("button");chev.className="chev";chev.textContent=isOpen?"⌃":"⌄";
+  rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);rtop.appendChild(linkBadge);rtop.appendChild(noteBadge);rtop.appendChild(chev);
+  row.appendChild(rtop);
+
   const rbot=document.createElement("div");rbot.className="rbot";
   const sbtn=document.createElement("button");sbtn.className="statusbtn "+(pub?"pub":"plan");sbtn.textContent=pub?"Yayında":"Yayınlanacak";
-  sbtn.onclick=()=>{v.status=pub?"planned":"published";renderPanel();renderTabs();refreshOverview();autosave();};
-  const date=document.createElement("input");date.type="date";date.className="datein"+(overdue?" overdue":"");date.value=v.date||"";
-  date.onchange=()=>{v.date=date.value;renderPanel();refreshOverview();autosave();};
+  sbtn.onclick=()=>{
+    if(pub){v.status="planned";v.publishedAt="";collapsed.planned=false;}
+    else{v.status="published";if(!v.publishedAt)v.publishedAt=todayStr();collapsed.published=false;}
+    renderPanel();renderTabs();refreshOverview();autosave();
+  };
+  const date=document.createElement("input");date.type="date";date.className="datein";date.value=v.date||"";
+  date.onchange=()=>{v.date=date.value;applyOverdue();refreshOverview();autosave();};
   const actions=document.createElement("div");actions.className="actions";
-  actions.appendChild(ibtn("▲",vi===0,()=>move(ch,vi,-1)));
-  actions.appendChild(ibtn("▼",vi===ch.videos.length-1,()=>move(ch,vi,1)));
-  actions.appendChild(ibtn("✕",false,()=>{ch.videos.splice(vi,1);renderPanel();renderTabs();refreshOverview();autosave();},true));
+  if(grp==="planned"){
+    const handle=document.createElement("button");handle.className="drag";handle.textContent="≡";handle.setAttribute("aria-label","sürükle");
+    const k=opts.pos||0;
+    handle.addEventListener("pointerdown",e=>startDrag(e,row,ch,k));
+    handle.addEventListener("pointermove",moveDrag);
+    handle.addEventListener("pointerup",endDrag);
+    handle.addEventListener("pointercancel",endDrag);
+    actions.appendChild(handle);
+  }
+  actions.appendChild(ibtn("✕",false,()=>{ch.videos.splice(arrIdx,1);expandedIds.delete(v.id);renderPanel();renderTabs();refreshOverview();autosave();},true));
   rbot.appendChild(sbtn);rbot.appendChild(date);rbot.appendChild(actions);row.appendChild(rbot);
-  if(overdue){const o=document.createElement("div");o.className="overtxt";o.textContent="gecikmiş · "+fmtDate(v.date);row.appendChild(o);}
+
+  const overEl=document.createElement("div");overEl.className="overtxt";overEl.style.display="none";row.appendChild(overEl);
+
+  const detail=document.createElement("div");detail.className="vdetail"+(isOpen?" open":"");
+  const ll=document.createElement("label");ll.textContent="YouTube linki · Studio'da açılır";
+  const linkIn=document.createElement("input");linkIn.className="vinput";linkIn.value=v.link||"";linkIn.placeholder="youtube.com/watch?v=… ya da video ID";
+  linkIn.oninput=()=>{v.link=linkIn.value;updBadges();autosave();};
+  const lrow=document.createElement("div");lrow.className="vdrow";
+  const openBtn=document.createElement("button");openBtn.className="vbtn b";openBtn.textContent="Studio'da aç";openBtn.onclick=()=>openStudio(v.link);
+  const calBtn=document.createElement("button");calBtn.className="vbtn g";calBtn.textContent="Takvime ekle · 19:00";calBtn.onclick=()=>downloadICS(ch,v);
+  lrow.appendChild(openBtn);lrow.appendChild(calBtn);
+  const nl=document.createElement("label");nl.textContent="Not";
+  const noteIn=document.createElement("textarea");noteIn.className="vnote";noteIn.value=v.note||"";noteIn.placeholder="Bu video hakkında not…";
+  noteIn.oninput=()=>{v.note=noteIn.value;updBadges();autosave();};
+  detail.appendChild(ll);detail.appendChild(linkIn);detail.appendChild(lrow);detail.appendChild(nl);detail.appendChild(noteIn);
+  row.appendChild(detail);
+
+  chev.onclick=()=>{const op=detail.classList.toggle("open");chev.textContent=op?"⌃":"⌄";if(op)expandedIds.add(v.id);else expandedIds.delete(v.id);};
+  updBadges();
+
+  function applyOverdue(){
+    const od=!pub&&v.date&&v.date<todayStr();
+    row.classList.toggle("overdue",od);
+    date.className="datein"+(od?" overdue":"");
+    dot.style.background=pub?cssVar("--green"):od?cssVar("--red"):cssVar("--amber");
+    if(od){overEl.style.display="";overEl.textContent="gecikmiş · "+fmtDate(v.date);}else overEl.style.display="none";
+  }
+  applyOverdue();
   return row;
 }
 function ibtn(label,disabled,onclick,danger){const b=document.createElement("button");b.className="ibtn"+(danger?" danger":"");b.textContent=label;b.disabled=disabled;b.onclick=onclick;return b;}
@@ -477,13 +746,158 @@ function setView(v){
   window.scrollTo(0,0);
 }
 function goToChannel(ci){activeCh=ci;renderTabs();renderPanel();setView("channels");}
-function refreshOverview(){renderStats();renderCapacity();renderCalendar();}
+function jumpToVideo(ci,vid){
+  const ch=state.channels[ci];const v=ch.videos.find(x=>x.id===vid);if(!v)return;
+  activeCh=ci;
+  if(v.status==="published")collapsed.published=false;else collapsed.planned=false;
+  expandedIds.add(vid);
+  closeModal();renderTabs();renderPanel();setView("channels");
+  setTimeout(()=>{const el=document.getElementById("vid-"+vid);if(el)el.scrollIntoView({block:"center",behavior:"smooth"});},60);
+}
+
+// ---- drag reorder (planned) ----
+function reorderPlanned(ch,fromPos,toPos){
+  const slots=[];ch.videos.forEach((v,i)=>{if(v.status!=="published")slots.push(i);});
+  if(fromPos<0||fromPos>=slots.length)return;
+  toPos=Math.max(0,Math.min(slots.length-1,toPos));
+  if(fromPos===toPos)return;
+  const order=slots.map(i=>ch.videos[i]);
+  const moved=order.splice(fromPos,1)[0];
+  order.splice(toPos,0,moved);
+  slots.forEach((arrIdx,k)=>{ch.videos[arrIdx]=order[k];});
+}
+let drag=null;
+function startDrag(e,row,ch,fromPos){
+  e.preventDefault();
+  const siblings=[...row.parentNode.children].filter(el=>el.classList.contains("row"));
+  drag={row,ch,fromPos,rects:siblings.map(el=>el.getBoundingClientRect()),startY:e.clientY};
+  row.classList.add("dragging");
+  try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}
+}
+function moveDrag(e){if(!drag)return;e.preventDefault();drag.row.style.transform="translateY("+(e.clientY-drag.startY)+"px)";drag.row.style.zIndex="5";}
+function endDrag(e){
+  if(!drag)return;
+  const y=(e&&e.clientY!=null)?e.clientY:drag.startY;
+  let t=0;drag.rects.forEach(r=>{if(y>r.top+r.height/2)t++;});
+  let toPos=t;if(toPos>drag.fromPos)toPos--;
+  const ch=drag.ch,from=drag.fromPos;
+  drag.row.style.transform="";drag.row.style.zIndex="";drag.row.classList.remove("dragging");
+  drag=null;
+  reorderPlanned(ch,from,toPos);renderPanel();refreshOverview();autosave();
+}
+
+// ---- search ----
+function searchResults(q){
+  q=(q||"").trim().toLocaleLowerCase("tr");
+  const out=[];if(!q)return out;
+  state.channels.forEach((c,ci)=>c.videos.forEach(v=>{if((v.title||"").toLocaleLowerCase("tr").includes(q))out.push({ci,c,v});}));
+  return out;
+}
+function openSearchModal(){
+  const wrap=document.createElement("div");
+  const inp=document.createElement("input");inp.className="vinput";inp.placeholder="Video ara…";inp.style.marginBottom="12px";
+  const res=document.createElement("div");
+  function render(){
+    res.innerHTML="";
+    if(!inp.value.trim()){const n=document.createElement("div");n.className="note";n.textContent="Başlık yaz, tüm kanallarda arar.";res.appendChild(n);return;}
+    const r=searchResults(inp.value);
+    if(r.length===0){const n=document.createElement("div");n.className="note";n.textContent="Eşleşme yok.";res.appendChild(n);return;}
+    r.forEach(it=>{
+      const row=document.createElement("div");row.className="sres";
+      const dot=document.createElement("span");dot.className="caldot";dot.style.background=it.c.color||"#888";
+      const mid=document.createElement("div");mid.className="calmid";
+      const ch=document.createElement("div");ch.className="calch";ch.textContent=it.c.name;
+      const vd=document.createElement("div");vd.className="calvid";vd.textContent=it.v.title;
+      mid.appendChild(ch);mid.appendChild(vd);
+      const st=document.createElement("span");st.className="srest";
+      const pubd=it.v.status==="published";st.textContent=pubd?"yayında":(it.v.date?fmtDate(it.v.date):"tarihsiz");
+      st.style.color=pubd?cssVar("--green"):cssVar("--muted");
+      row.appendChild(dot);row.appendChild(mid);row.appendChild(st);
+      row.onclick=()=>jumpToVideo(it.ci,it.v.id);
+      res.appendChild(row);
+    });
+  }
+  inp.oninput=render;
+  wrap.appendChild(inp);wrap.appendChild(res);
+  openModalNode("Ara",wrap);render();
+  setTimeout(()=>inp.focus(),50);
+}
+function refreshOverview(){renderStats();renderCapacity();renderTempo();renderBreakdown();renderCalendar();}
+
+function effPubDate(v){return v.publishedAt||v.date||"";}
+function renderTempo(){
+  const card=document.getElementById("tempoCard");if(!card)return;card.innerHTML="";
+  const dates=[];
+  state.channels.forEach(c=>c.videos.forEach(v=>{if(v.status==="published"){const d=effPubDate(v);if(d)dates.push(d);}}));
+  const now=new Date();const day=(now.getDay()+6)%7;const curMon=new Date(now);curMon.setDate(now.getDate()-day);
+  const buckets=[];
+  for(let i=7;i>=0;i--){const s=new Date(curMon);s.setDate(curMon.getDate()-i*7);const e=new Date(s);e.setDate(s.getDate()+6);buckets.push({s:toYMD(s),e:toYMD(e),label:s.getDate()+"/"+(s.getMonth()+1),count:0});}
+  dates.forEach(d=>{for(const b of buckets){if(d>=b.s&&d<=b.e){b.count++;break;}}});
+  const max=Math.max(1,...buckets.map(b=>b.count));
+  const[wkS,wkE]=weekRange();const[moS,moE]=monthRange();
+  let wk=0,mo=0;dates.forEach(d=>{if(d>=wkS&&d<=wkE)wk++;if(d>=moS&&d<=moE)mo++;});
+
+  const sum=document.createElement("div");sum.className="temposum";
+  sum.innerHTML=`Bu hafta <b>${wk}</b> · Bu ay <b>${mo}</b> · Toplam <b>${dates.length}</b> yayın`;
+  card.appendChild(sum);
+
+  const bars=document.createElement("div");bars.className="tempobars";
+  buckets.forEach(b=>{
+    const col=document.createElement("div");col.className="tcol";
+    const c=document.createElement("div");c.className="tcount";c.textContent=b.count;
+    const bar=document.createElement("div");bar.className="tbar"+(b.count===0?" zero":"");
+    bar.style.height=(b.count>0?Math.max(4,Math.round(b.count/max*70)):3)+"px";
+    col.appendChild(c);col.appendChild(bar);bars.appendChild(col);
+  });
+  card.appendChild(bars);
+  const labs=document.createElement("div");labs.className="tlabels";
+  buckets.forEach(b=>{const l=document.createElement("div");l.className="tlab";l.textContent=b.label;labs.appendChild(l);});
+  card.appendChild(labs);
+
+  if(dates.length===0){const e=document.createElement("div");e.className="note";e.style.marginTop="10px";e.textContent="Henüz yayınlanan video yok. Bir video 'Yayında' olunca burada birikir.";card.appendChild(e);}
+}
+
+function renderBreakdown(){
+  const t=todayStr();
+  const card=document.getElementById("brkCard");if(!card)return;card.innerHTML="";
+  state.channels.forEach((c,ci)=>{
+    const planned=c.videos.filter(v=>v.status!=="published");
+    const published=c.videos.length-planned.length;
+    const overdue=planned.filter(v=>v.date&&v.date<t).length;
+    const upcoming=planned.map(v=>v.date).filter(d=>d&&d>=t).sort();
+    const nextD=upcoming.length?upcoming[0]:"";
+    const row=document.createElement("div");row.className="brkrow";
+    const top=document.createElement("div");top.className="brktop";
+    const dot=document.createElement("span");dot.className="brkdot";dot.style.background=c.color||"#888";
+    const nm=document.createElement("span");nm.className="brkname";nm.textContent=c.name;
+    const nx=document.createElement("span");nx.className="brknext";nx.textContent=nextD?("sıradaki "+fmtDate(nextD)):"sıradaki —";
+    top.appendChild(dot);top.appendChild(nm);top.appendChild(nx);
+    const st=document.createElement("div");st.className="brkstats";
+    st.innerHTML=`${planned.length} plan · ${published} yayında`+(overdue>0?` · <span class="od">${overdue} geciken</span>`:"");
+    row.appendChild(top);row.appendChild(st);
+    row.onclick=()=>goToChannel(ci);
+    card.appendChild(row);
+  });
+}
+function openColorModal(ci){
+  const ch=state.channels[ci];
+  const wrap=document.createElement("div");wrap.className="swatches";
+  PALETTE.forEach(col=>{
+    const b=document.createElement("button");b.className="swatch"+(ch.color===col?" on":"");b.style.background=col;
+    b.onclick=()=>{ch.color=col;closeModal();renderTabs();renderPanel();refreshOverview();autosave();};
+    wrap.appendChild(b);
+  });
+  openModalNode("Kanal rengi",wrap);
+}
 function renderSavedAt(){document.getElementById("savedAt").textContent=savedAt?("kayıt "+new Date(savedAt).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})):"kayıt yok";}
 function renderAll(){refreshOverview();renderBackup();renderTabs();renderPanel();renderSavedAt();}
 
 document.getElementById("vtabOverview").onclick=()=>setView("overview");
 document.getElementById("vtabChannels").onclick=()=>setView("channels");
 document.getElementById("saveBtn").onclick=()=>save(false);
+document.getElementById("modalClose").onclick=closeModal;
+document.getElementById("modal").onclick=(e)=>{if(e.target.id==="modal")closeModal();};
+(function(){const sb=document.getElementById("searchBtn");sb.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>';sb.onclick=openSearchModal;})();
 
 renderAll();
 
