@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Yayın Panosu</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#0E0F12" />
+<!-- iOS standalone -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Yayın Panosu" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<style>
+  :root{
+    --bg:#0E0F12; --panel:#16181D; --panel2:#1C1F26; --line:#262932;
+    --text:#E6E7EA; --muted:#8A8F98; --faint:#5B606B;
+    --amber:#F0B429; --green:#34D399; --red:#F87171; --blue:#5EA0FF;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
+  body{padding-bottom:104px;min-height:100vh}
+  input{font-size:16px;font-family:inherit}
+  input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7)}
+  button{font-family:inherit;cursor:pointer}
+  .label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+    padding:calc(14px + env(safe-area-inset-top)) 16px 12px;display:flex;justify-content:space-between;align-items:baseline}
+  .brand{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--amber)}
+  .h1{font-size:19px;font-weight:800;letter-spacing:-.3px}
+  .savedAt{font-family:var(--mono);font-size:10px;color:var(--faint);text-align:right}
+  /* stats */
+  .pad{padding:16px 16px 8px}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center}
+  .stat.sm{padding:10px 8px}
+  .stat .n{font-family:var(--mono);font-weight:800;font-size:30px;line-height:1}
+  .stat.sm .n{font-size:22px}
+  .stat .t{font-size:11px;color:var(--muted);margin-top:5px}
+  .stat.sm .t{font-size:10px}
+  /* tabs */
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding:0 16px 4px;-webkit-overflow-scrolling:touch}
+  .tab{flex:0 0 auto;padding:10px 14px;border-radius:12px;min-height:44px;border:1px solid var(--line);
+    background:var(--panel);color:var(--text);font-weight:700;font-size:14px}
+  .tab.active{border-color:var(--amber);background:rgba(240,180,41,.12);color:var(--amber)}
+  .tab .c{font-family:var(--mono);font-size:11px;margin-left:8px;color:var(--faint)}
+  .tab.active .c{color:var(--amber)}
+  /* channel panel */
+  .panelwrap{padding:14px 16px 0}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+  .chname{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-size:18px;font-weight:800;padding:2px 0 8px}
+  .chmeta{font-family:var(--mono);font-size:11px;color:var(--faint);border-top:1px solid var(--line);padding-top:8px}
+  .vids{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+  .empty{color:var(--faint);font-size:13px;padding:18px 0;text-align:center}
+  .row{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px}
+  .row.overdue{border-color:rgba(248,113,113,.4)}
+  .rtop{display:flex;align-items:center;gap:8px}
+  .idx{font-family:var(--mono);font-size:12px;color:var(--faint);width:22px}
+  .dot{width:8px;height:8px;border-radius:999px;flex:0 0 auto}
+  .vtitle{flex:1;min-width:0;background:transparent;border:none;outline:none;color:var(--text);font-size:15px;font-weight:600}
+  .vtitle.pub{color:var(--muted);text-decoration:line-through}
+  .rbot{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
+  .statusbtn{min-height:36px;padding:0 12px;border-radius:9px;font-size:12px;font-weight:700;border:1px solid}
+  .statusbtn.plan{border-color:var(--amber);background:rgba(240,180,41,.10);color:var(--amber)}
+  .statusbtn.pub{border-color:var(--green);background:rgba(52,211,153,.12);color:var(--green)}
+  .datein{min-height:36px;padding:0 8px;border-radius:9px;font-family:var(--mono);font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+  .datein.overdue{border-color:var(--red);color:var(--red)}
+  .actions{margin-left:auto;display:flex;gap:6px}
+  .ibtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:13px}
+  .ibtn:disabled{color:var(--faint);opacity:.4}
+  .ibtn.danger{color:var(--red)}
+  .overtxt{font-family:var(--mono);font-size:11px;color:var(--red);margin-top:7px}
+  .addbtn{margin-top:12px;width:100%;min-height:46px;border-radius:12px;border:1px dashed var(--line);background:var(--panel2);color:var(--amber);font-weight:700;font-size:14px}
+  /* save bar */
+  .savebar{position:fixed;bottom:0;left:0;right:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top,var(--bg) 70%,transparent)}
+  .savebtn{width:100%;min-height:52px;border-radius:14px;border:none;background:var(--amber);color:#1A1400;font-weight:800;font-size:16px}
+  .toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:var(--panel2);color:var(--green);
+    border:1px solid var(--green);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;z-index:40;opacity:0;transition:opacity .2s}
+  .toast.show{opacity:1}
+  .toast.err{color:#1A0000;background:var(--red);border-color:var(--red)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">OVERSEER</div>
+      <div class="h1">Yayın Panosu</div>
+    </div>
+    <div class="savedAt" id="savedAt">kayıt yok</div>
+  </header>
+
+  <div class="pad">
+    <div class="label">İş Yükü · yayınlanacak</div>
+    <div class="grid" id="statsTop"></div>
+    <div class="grid" id="statsBot"></div>
+  </div>
+
+  <div class="pad" style="padding-bottom:4px"><div class="label">Kanallar</div></div>
+  <div class="tabs" id="tabs"></div>
+
+  <div class="panelwrap"><div class="panel" id="panel"></div></div>
+
+  <div class="savebar"><button class="savebtn" id="saveBtn">Kaydet</button></div>
+  <div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const KEY = "yayin-panosu-v1";
+const uid = () => Math.random().toString(36).slice(2,9);
+
+// ---- date helpers ----
+const pad = n => String(n).padStart(2,"0");
+const toYMD = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const todayStr = () => toYMD(new Date());
+function weekRange(){const d=new Date();const day=(d.getDay()+6)%7;const s=new Date(d);s.setDate(d.getDate()-day);const e=new Date(s);e.setDate(s.getDate()+6);return[toYMD(s),toYMD(e)];}
+function monthRange(){const d=new Date();return[toYMD(new Date(d.getFullYear(),d.getMonth(),1)),toYMD(new Date(d.getFullYear(),d.getMonth()+1,0))];}
+const fmtDate = ymd => {if(!ymd)return"tarih yok";const[y,m,dd]=ymd.split("-");return `${dd}.${m}.${y}`;};
+
+function defaultState(){
+  return {channels:Array.from({length:5},(_,i)=>({id:uid(),name:`Kanal ${i+1}`,videos:[]}))};
+}
+
+// ---- load ----
+let state, savedAt=null, activeCh=0, autoTimer=null;
+try{
+  const raw = localStorage.getItem(KEY);
+  if(raw){const p=JSON.parse(raw);state=p.state||defaultState();savedAt=p.savedAt||null;}
+  else state=defaultState();
+}catch(e){state=defaultState();}
+
+// ---- persist ----
+function save(silent){
+  const ts=Date.now();
+  try{
+    localStorage.setItem(KEY,JSON.stringify({state,savedAt:ts}));
+    savedAt=ts;renderSavedAt();
+    if(!silent)flash("Kaydedildi",false);
+  }catch(e){ if(!silent)flash("Kaydedilemedi",true); }
+}
+function autosave(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>save(true),1200);}
+
+let toastTimer=null;
+function flash(msg,err){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.className="toast show"+(err?" err":"");
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className="toast",1700);
+}
+
+// ---- workload ----
+function workload(){
+  const t=todayStr();const[wkS,wkE]=weekRange();const[moS,moE]=monthRange();
+  let daily=0,weekly=0,monthly=0,overdue=0,planned=0,published=0;
+  for(const ch of state.channels)for(const v of ch.videos){
+    if(v.status==="published"){published++;continue;}
+    planned++;
+    if(!v.date)continue;
+    if(v.date===t)daily++;
+    if(v.date>=wkS&&v.date<=wkE)weekly++;
+    if(v.date>=moS&&v.date<=moE)monthly++;
+    if(v.date<t)overdue++;
+  }
+  return{daily,weekly,monthly,overdue,planned,published};
+}
+
+// ---- render: stats ----
+function statEl(n,label,color,sm){
+  const d=document.createElement("div");d.className="stat"+(sm?" sm":"");
+  const a=document.createElement("div");a.className="n";a.style.color=color;a.textContent=n;
+  const b=document.createElement("div");b.className="t";b.textContent=label;
+  d.appendChild(a);d.appendChild(b);return d;
+}
+function renderStats(){
+  const w=workload();const cs=getComputedStyle(document.documentElement);
+  const amber=cs.getPropertyValue("--amber"),blue=cs.getPropertyValue("--blue"),text=cs.getPropertyValue("--text"),
+        red=cs.getPropertyValue("--red"),muted=cs.getPropertyValue("--muted"),green=cs.getPropertyValue("--green");
+  const top=document.getElementById("statsTop");top.innerHTML="";
+  top.appendChild(statEl(w.daily,"Bugün",amber));
+  top.appendChild(statEl(w.weekly,"Bu Hafta",blue));
+  top.appendChild(statEl(w.monthly,"Bu Ay",text));
+  const bot=document.getElementById("statsBot");bot.innerHTML="";
+  bot.appendChild(statEl(w.overdue,"Geciken",red,true));
+  bot.appendChild(statEl(w.planned,"Toplam plan",muted,true));
+  bot.appendChild(statEl(w.published,"Yayında",green,true));
+}
+
+// ---- render: tabs ----
+function renderTabs(){
+  const wrap=document.getElementById("tabs");wrap.innerHTML="";
+  state.channels.forEach((c,i)=>{
+    const b=document.createElement("button");
+    b.className="tab"+(i===activeCh?" active":"");
+    b.appendChild(document.createTextNode(c.name||" "));
+    const cnt=c.videos.filter(v=>v.status==="planned").length;
+    if(cnt>0){const s=document.createElement("span");s.className="c";s.textContent=cnt;b.appendChild(s);}
+    b.onclick=()=>{activeCh=i;renderTabs();renderPanel();};
+    wrap.appendChild(b);
+  });
+}
+
+// ---- render: panel ----
+function renderPanel(){
+  const ch=state.channels[activeCh];
+  const panel=document.getElementById("panel");panel.innerHTML="";
+
+  const name=document.createElement("input");
+  name.className="chname";name.value=ch.name;name.placeholder="Kanal adı";
+  name.oninput=()=>{ch.name=name.value;
+    const tab=document.querySelectorAll(".tab")[activeCh];
+    if(tab)tab.childNodes[0].nodeValue=name.value||" ";
+    autosave();};
+  panel.appendChild(name);
+
+  const planned=ch.videos.filter(v=>v.status==="planned").length;
+  const meta=document.createElement("div");meta.className="chmeta";
+  meta.textContent=`${ch.videos.length} video · ${planned} yayınlanacak · ${ch.videos.length-planned} yayında`;
+  panel.appendChild(meta);
+
+  const vids=document.createElement("div");vids.className="vids";
+  if(ch.videos.length===0){
+    const e=document.createElement("div");e.className="empty";e.textContent="Henüz video yok. Aşağıdan ekle.";vids.appendChild(e);
+  }
+  ch.videos.forEach((v,vi)=>vids.appendChild(videoRow(ch,v,vi)));
+  panel.appendChild(vids);
+
+  const add=document.createElement("button");add.className="addbtn";add.textContent="+ Video ekle";
+  add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:""});
+    renderPanel();renderTabs();renderStats();autosave();};
+  panel.appendChild(add);
+}
+
+function videoRow(ch,v,vi){
+  const t=todayStr();
+  const pub=v.status==="published";
+  const overdue=!pub&&v.date&&v.date<t;
+  const cs=getComputedStyle(document.documentElement);
+  const dotColor=pub?cs.getPropertyValue("--green"):overdue?cs.getPropertyValue("--red"):cs.getPropertyValue("--amber");
+
+  const row=document.createElement("div");row.className="row"+(overdue?" overdue":"");
+
+  const rtop=document.createElement("div");rtop.className="rtop";
+  const idx=document.createElement("span");idx.className="idx";idx.textContent="#"+(vi+1);
+  const dot=document.createElement("span");dot.className="dot";dot.style.background=dotColor;
+  const title=document.createElement("input");title.className="vtitle"+(pub?" pub":"");title.value=v.title;title.placeholder="Video adı";
+  title.oninput=()=>{v.title=title.value;autosave();};
+  rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);
+  row.appendChild(rtop);
+
+  const rbot=document.createElement("div");rbot.className="rbot";
+  const sbtn=document.createElement("button");
+  sbtn.className="statusbtn "+(pub?"pub":"plan");sbtn.textContent=pub?"Yayında":"Yayınlanacak";
+  sbtn.onclick=()=>{v.status=pub?"planned":"published";renderPanel();renderTabs();renderStats();autosave();};
+
+  const date=document.createElement("input");date.type="date";date.className="datein"+(overdue?" overdue":"");date.value=v.date||"";
+  date.onchange=()=>{v.date=date.value;renderPanel();renderStats();autosave();};
+
+  const actions=document.createElement("div");actions.className="actions";
+  const up=ibtn("▲",vi===0,()=>move(ch,vi,-1));
+  const down=ibtn("▼",vi===ch.videos.length-1,()=>move(ch,vi,1));
+  const del=ibtn("✕",false,()=>{ch.videos.splice(vi,1);renderPanel();renderTabs();renderStats();autosave();},true);
+  actions.appendChild(up);actions.appendChild(down);actions.appendChild(del);
+
+  rbot.appendChild(sbtn);rbot.appendChild(date);rbot.appendChild(actions);
+  row.appendChild(rbot);
+
+  if(overdue){const o=document.createElement("div");o.className="overtxt";o.textContent="gecikmiş · "+fmtDate(v.date);row.appendChild(o);}
+  return row;
+}
+function ibtn(label,disabled,onclick,danger){
+  const b=document.createElement("button");b.className="ibtn"+(danger?" danger":"");b.textContent=label;
+  b.disabled=disabled;b.onclick=onclick;return b;
+}
+function move(ch,vi,dir){const j=vi+dir;if(j<0||j>=ch.videos.length)return;
+  [ch.videos[vi],ch.videos[j]]=[ch.videos[j],ch.videos[vi]];renderPanel();renderStats();autosave();}
+
+function renderSavedAt(){
+  document.getElementById("savedAt").textContent =
+    savedAt?("kayıt "+new Date(savedAt).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})):"kayıt yok";
+}
+
+document.getElementById("saveBtn").onclick=()=>save(false);
+
+renderStats();renderTabs();renderPanel();renderSavedAt();
+
+// service worker (offline)
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
