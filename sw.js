@@ -1,4 +1,4 @@
-const CACHE = "yayin-panosu-v1";
+const CACHE = "yayin-panosu-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -21,15 +21,32 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  if (e.request.method !== "GET") return;
-  e.respondWith(
-    caches.match(e.request).then((hit) =>
-      hit ||
-      fetch(e.request).then((res) => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+
+  const isHTML = req.mode === "navigate" || req.destination === "document";
+
+  if (isHTML) {
+    // network-first: en güncel index.html'i çek, offline'da cache'e düş
+    e.respondWith(
+      fetch(req).then((res) => {
         const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
+        caches.open(CACHE).then((c) => c.put("./index.html", copy)).catch(() => {});
         return res;
-      }).catch(() => caches.match("./index.html"))
+      }).catch(() => caches.match("./index.html").then((r) => r || caches.match("./")))
+    );
+    return;
+  }
+
+  // diğer varlıklar: cache-first
+  e.respondWith(
+    caches.match(req).then((hit) =>
+      hit ||
+      fetch(req).then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
+        return res;
+      }).catch(() => undefined)
     )
   );
 });
