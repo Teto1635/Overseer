@@ -939,9 +939,25 @@ async function pushCloud(){
   try{const ref=cloud.fs.doc(cloud.db,"boards",cloud.code);await cloud.fs.setDoc(ref,{stateJson:JSON.stringify(state),savedAt:Date.now()});}
   catch(e){cloudStatus("Yazma hatası",true);}
 }
+function extractConfigObject(text){
+  const s=text||"";
+  const fc=s.indexOf("firebaseConfig");
+  let start=(fc>=0)?s.indexOf("{",fc):s.indexOf("{");
+  if(start<0)return null;
+  let depth=0,end=-1;
+  for(let i=start;i<s.length;i++){if(s[i]==="{")depth++;else if(s[i]==="}"){depth--;if(depth===0){end=i;break;}}}
+  if(end<0)return null;
+  return s.slice(start,end+1);
+}
+function parseConfig(text){
+  const obj=extractConfigObject(text);if(!obj)return null;
+  try{return JSON.parse(obj);}catch(e){}
+  try{return (new Function("return ("+obj+")"))();}catch(e){}
+  return null;
+}
 function cloudSetup(configText,codeText){
-  let config;try{config=JSON.parse(configText);}catch(e){flash("Config JSON geçersiz",true);return;}
-  if(!config.projectId||!config.apiKey){flash("Config eksik görünüyor",true);return;}
+  const config=parseConfig(configText);
+  if(!config||!config.projectId||!config.apiKey){flash("Config okunamadı — apiKey/projectId içeren bloğu yapıştır",true);return;}
   const code=(codeText&&codeText.trim())?codeText.trim().replace(/\s/g,""):genCode();
   localStorage.setItem("cloudConfig",JSON.stringify(config));
   localStorage.setItem("boardCode",code);
@@ -997,7 +1013,7 @@ function openCloudModal(){
   steps.innerHTML="Tek seferlik kurulum: <b>console.firebase.google.com</b> → proje oluştur → Web app ekle (&lt;/&gt; ikonu) → çıkan <b>firebaseConfig</b> nesnesini kopyala → Build &gt; Firestore Database &gt; veritabanı oluştur (kuralları ayrıca verdim).";
   wrap.appendChild(steps);
   const l1=document.createElement("label");l1.textContent="firebaseConfig (sahip)";l1.className="cloudlbl";
-  const cfg=document.createElement("textarea");cfg.className="vnote";cfg.placeholder='{ "apiKey": "...", "projectId": "...", ... }';cfg.style.minHeight="92px";
+  const cfg=document.createElement("textarea");cfg.className="vnote";cfg.placeholder='Firebase\'in verdiği "const firebaseConfig = { ... }" bloğunu olduğu gibi yapıştır';cfg.style.minHeight="92px";
   const codeIn=document.createElement("input");codeIn.className="vinput";codeIn.placeholder="Pano kodu (boş = otomatik üret)";codeIn.style.marginTop="10px";
   const connBtn=document.createElement("button");connBtn.className="applybtn";connBtn.style.marginTop="6px";connBtn.textContent="Bağlan & kod üret";connBtn.onclick=()=>cloudSetup(cfg.value,codeIn.value);
   wrap.appendChild(l1);wrap.appendChild(cfg);wrap.appendChild(codeIn);wrap.appendChild(connBtn);
