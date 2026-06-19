@@ -31,11 +31,15 @@
   .brand{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--amber)}
   .h1{font-size:19px;font-weight:800;letter-spacing:-.3px}
   .savedAt{font-family:var(--mono);font-size:10px;color:var(--faint);text-align:right}
+  .langtog{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .lt{min-width:30px;height:24px;padding:0 7px;background:var(--panel);color:var(--faint);font-size:11px;font-weight:800;font-family:var(--mono);border:none;border-left:1px solid var(--line)}
+  .lt:first-child{border-left:none}
+  .lt.on{background:rgba(240,180,41,.16);color:var(--amber)}
 
   /* view tabs */
-  .viewtabs{display:flex;gap:6px;padding:12px 16px 4px}
-  .vtab{flex:1;min-height:42px;border-radius:11px;border:1px solid var(--line);background:var(--panel);
-    color:var(--muted);font-weight:700;font-size:14px}
+  .viewtabs{display:flex;gap:6px;padding:12px 16px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .vtab{flex:0 0 auto;min-height:42px;padding:0 16px;border-radius:11px;border:1px solid var(--line);background:var(--panel);
+    color:var(--muted);font-weight:700;font-size:13px;white-space:nowrap}
   .vtab.active{border-color:var(--amber);background:rgba(240,180,41,.12);color:var(--amber)}
 
   .pad{padding:14px 16px 4px}
@@ -182,6 +186,38 @@
   .sres{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);margin-bottom:6px}
   .srest{font-family:var(--mono);font-size:11px;flex:0 0 auto}
   .cloudlbl{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+  .badge.chk{font-family:var(--mono)}
+  .chkrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chk{min-height:38px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:13px;font-weight:700}
+  .chk.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:var(--green)}
+  .calnav{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px;gap:10px}
+  .calmonth{font-size:17px;font-weight:800}
+  .navbtn{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:18px;flex:0 0 auto}
+  .todaybtn{margin:0 16px 8px;min-height:36px;padding:0 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:12px;font-weight:700}
+  .calgridhead{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 12px}
+  .wkh{text-align:center;font-family:var(--mono);font-size:10px;color:var(--faint);padding:4px 0}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:4px 12px}
+  .celld{min-height:54px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:4px;display:flex;flex-direction:column;gap:3px}
+  .celld.blank{background:transparent;border-color:transparent}
+  .celld.istoday{border-color:var(--amber)}
+  .celld.has{cursor:pointer}
+  .daynum{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .celld.istoday .daynum{color:var(--amber);font-weight:700}
+  .daydots{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+  .ddot{width:8px;height:8px;border-radius:999px;flex:0 0 auto}
+  .ddot.pub{opacity:.4}
+  .dmore{font-family:var(--mono);font-size:9px;color:var(--faint)}
+  .callegend{display:flex;flex-wrap:wrap;gap:10px 14px;padding:14px 16px 4px}
+  .legitem{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+  .ideacard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+  .irow1{display:flex;align-items:center;gap:8px}
+  .istar{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--faint);font-size:16px;flex:0 0 auto}
+  .istar.on{color:var(--amber);border-color:rgba(240,180,41,.5)}
+  .ititle{flex:1;min-width:0;background:transparent;border:none;outline:none;color:var(--text);font-size:15px;font-weight:700}
+  .inote{width:100%;min-height:52px;margin-top:8px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 10px;resize:vertical;font-family:inherit;line-height:1.4;font-size:14px}
+  .irow3{display:flex;gap:8px;margin-top:10px}
+  .irow3 .fsel{flex:1}
+  .convbtn{flex:0 0 auto;min-height:44px;padding:0 14px;border-radius:9px;border:1px solid var(--amber);background:rgba(240,180,41,.10);color:var(--amber);font-weight:700;font-size:13px}
   .addbtn{margin-top:12px;width:100%;min-height:46px;border-radius:12px;border:1px dashed var(--line);background:var(--panel2);color:var(--amber);font-weight:700;font-size:14px}
 
   /* backup */
@@ -208,54 +244,67 @@
   <header>
     <div>
       <div class="brand">OVERSEER</div>
-      <div class="h1">Yayın Panosu</div>
+      <div class="h1" data-i18n="appTitle">Yayın Panosu</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <button class="iconbtn" id="searchBtn" aria-label="Ara"></button>
-      <div class="savedAt" id="savedAt">kayıt yok</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+        <div class="savedAt" id="savedAt">kayıt yok</div>
+        <div class="langtog" id="langTog">
+          <button class="lt" id="langTR">TR</button><button class="lt" id="langEN">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <div class="viewtabs">
-    <button class="vtab active" id="vtabOverview">Genel Bakış</button>
-    <button class="vtab" id="vtabChannels">Kanallar</button>
+    <button class="vtab active" id="vtabOverview" data-i18n="tabOverview">Genel Bakış</button>
+    <button class="vtab" id="vtabChannels" data-i18n="tabChannels">Kanallar</button>
+    <button class="vtab" id="vtabCalendar" data-i18n="tabCalendar">Takvim</button>
+    <button class="vtab" id="vtabIdeas" data-i18n="tabIdeas">Fikirler</button>
   </div>
 
   <!-- OVERVIEW -->
   <div class="view active" id="overview">
-    <div class="pad"><div class="label">İş Yükü · yayınlanacak</div></div>
+    <div class="pad"><div class="label" data-i18n="ovWorkload">İş Yükü · yayınlanacak</div></div>
     <div style="padding:0 16px 12px">
       <div class="grid" id="statsTop"></div>
       <div class="grid" id="statsBot"></div>
     </div>
 
-    <div class="pad"><div class="label">Kapasite</div></div>
+    <div class="pad"><div class="label" data-i18n="ovCapacity">Kapasite</div></div>
     <div class="card" id="capCard"></div>
 
-    <div class="pad"><div class="label">Yayın temposu · son 8 hafta</div></div>
+    <div class="pad"><div class="label" data-i18n="ovTempo">Yayın temposu · son 8 hafta</div></div>
     <div class="card" id="tempoCard"></div>
 
-    <div class="pad"><div class="label">Kanal kırılımı</div></div>
+    <div class="pad"><div class="label" data-i18n="ovBreakdown">Kanal kırılımı</div></div>
     <div class="card" id="brkCard"></div>
 
-    <div class="pad"><div class="label">Sıradaki 5 Yayın · tüm kanallar</div></div>
+    <div class="pad"><div class="label" data-i18n="ovNext5">Sıradaki 5 Yayın · tüm kanallar</div></div>
     <div class="card" id="calCard"></div>
 
-    <div class="pad"><div class="label">Bulut · ortak yönetim</div></div>
+    <div class="pad"><div class="label" data-i18n="ovCloud">Bulut · ortak yönetim</div></div>
     <div class="card" id="cloudCard"></div>
 
-    <div class="pad"><div class="label">Yedek</div></div>
+    <div class="pad"><div class="label" data-i18n="ovBackup">Yedek</div></div>
     <div class="card" id="bkCard"></div>
   </div>
 
   <!-- CHANNELS -->
   <div class="view" id="channels">
-    <div class="pad" style="padding-bottom:4px"><div class="label">Kanallar</div></div>
+    <div class="pad" style="padding-bottom:4px"><div class="label" data-i18n="tabChannels">Kanallar</div></div>
     <div class="tabs" id="tabs"></div>
     <div class="panelwrap"><div class="panel" id="panel"></div></div>
   </div>
 
-  <div class="savebar"><button class="savebtn" id="saveBtn">Kaydet</button></div>
+  <!-- CALENDAR -->
+  <div class="view" id="calendarView"></div>
+
+  <!-- IDEAS -->
+  <div class="view" id="ideasView"></div>
+
+  <div class="savebar"><button class="savebtn" id="saveBtn" data-i18n="save">Kaydet</button></div>
   <div class="toast" id="toast"></div>
   <div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><span id="modalTitle"></span><button id="modalClose">✕</button></div><div class="modalbody" id="modalBody"></div></div></div>
 
@@ -264,6 +313,118 @@
 const KEY = "yayin-panosu-v1";
 const uid = () => Math.random().toString(36).slice(2,9);
 const PALETTE=["#F0B429","#5EA0FF","#34D399","#A78BFA","#F472B6","#FB923C","#22D3EE","#F87171"];
+const CHECK_STEPS=[["ses","Seslendirme"],["srt","SRT"],["edit","Edit"],["pin","Sabit yorum"]];
+const MONTHS_TR=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+const MONTHS_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const MONTHS={tr:MONTHS_TR,en:MONTHS_EN};
+const WD={tr:["Pzt","Sal","Çar","Per","Cum","Cmt","Paz"],en:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]};
+let lang=(function(){try{return localStorage.getItem("yp-lang")==="en"?"en":"tr";}catch(e){return "tr";}})();
+const I18N={
+ tr:{
+  appTitle:"Yayın Panosu",
+  tabOverview:"Genel Bakış", tabChannels:"Kanallar", tabCalendar:"Takvim", tabIdeas:"Fikirler",
+  save:"Kaydet", saved:"Kaydedildi", saveFail:"Kaydedilemedi", savedAt:"kayıt", savedNone:"kayıt yok",
+  ovWorkload:"İş Yükü · yayınlanacak", stToday:"Bugün", stWeek:"Bu Hafta", stMonth:"Bu Ay", stOverdue:"Geciken", stPlanned:"Toplam plan", stLive:"Yayında",
+  ovCapacity:"Kapasite", estWorkload:"Tahmini iş gücü", hPerVideo:"saat/video", hPerDay:"saat/gün", capWeek:"Bu hafta", capMonth:"Bu ay", hShort:"s",
+  capNote:"Kaba tahmin: tarihli & yayınlanacak videolar × saat/video. Kapasite = saat/gün × gün sayısı.",
+  capOver:"kapasiteyi ", capOverTail:" aşıyor",
+  ovTempo:"Yayın temposu · son 8 hafta", tempoWeek:"Bu hafta", tempoMonth:"Bu ay", tempoTotal:"Toplam", tempoPub:"yayın",
+  tempoEmpty:"Henüz yayınlanan video yok. Bir video 'Yayında' olunca burada birikir.",
+  ovBreakdown:"Kanal kırılımı", brkNext:"sıradaki", brkPlan:"plan", brkLive:"yayında", brkOverdue:"geciken",
+  ovNext5:"Sıradaki 5 Yayın · tüm kanallar",
+  next5NoDated:"Tarihli yayın yok ·", next5Undated:"tarihsiz video", next5More:"sonraki", next5UndatedShort:"tarihsiz", next5InChannels:"— Kanallar'da",
+  ovCloud:"Bulut · ortak yönetim",
+  clStatus:"Durum:", clLocal:"Yerel", clLocalTail:"(bulut kapalı)", clCode:"kod",
+  clConnecting:"Bağlanılıyor…", clConnected:"Bağlı", clSync:"Senkron", clNewBoard:"Bağlı · yeni pano",
+  clBadConfig:"Yapılandırma bozuk", clLoadFail:"Firebase yüklenemedi (internet?)", clWriteErr:"Yazma hatası", clErr:"Hata:", clConnErr:"bağlantı",
+  clShare:"Davet kodunu paylaş", clDisconnect:"Bağlantıyı kes", clConnect:"Buluta bağlan / katıl",
+  clNoteOn:"Kodu bilen herkes düzenleyebilir (paylaşılan şifre gibi). Sadece ekip arkadaşına ver.",
+  clNoteOff:"Ortak yönetim için tek seferlik Firebase (Google) kurulumu gerekir. Bağlan'a basınca adımlar açılır.",
+  clSteps:"Tek seferlik kurulum: <b>console.firebase.google.com</b> → proje oluştur → Web app ekle (&lt;/&gt; ikonu) → çıkan <b>firebaseConfig</b> nesnesini kopyala → Build &gt; Firestore Database &gt; veritabanı oluştur (kuralları ayrıca verdim).",
+  clCfgLabel:"firebaseConfig (sahip)", clCfgPlaceholder:'Firebase\'in verdiği "const firebaseConfig = { ... }" bloğunu olduğu gibi yapıştır',
+  clCodePlaceholder:"Pano kodu (boş = otomatik üret)", clConnGen:"Bağlan & kod üret", clOr:"— veya —",
+  clJoinLabel:"Davet koduyla katıl (ekip arkadaşı)", clJoinPlaceholder:"Sana gelen davet kodunu yapıştır", clJoin:"Katıl", clModalTitle:"Bulut bağlantısı",
+  clCopied:"Davet kodu kopyalandı", clCopyFail:"Kopyalanamadı", clConnectFirst:"Önce bağlan", clBadInvite:"Geçersiz davet kodu",
+  clCfgUnread:"Config okunamadı — apiKey/projectId içeren bloğu yapıştır", clDisconnected:"Bağlantı kesildi", clDisconnectConfirm:"Bulut bağlantısı kesilsin? Veriler cihazda kalır.",
+  ovBackup:"Yedek",
+  bkExport:"Yedeği dışa aktar", bkImport:"Yedekten geri yükle", bkCopy:"JSON'u kopyala", bkPasteToggle:"· yapıştırarak yükle", bkPasteLoad:"Yapıştırılanı yükle",
+  bkPastePlaceholder:"Yedek JSON'unu buraya yapıştır, sonra Yükle'ye bas.",
+  bkNote:"Dışa aktar: Dosyalar/Drive'a kaydet ya da AirDrop'la. Geri yükle mevcut verinin üstüne yazar.",
+  bkDownloaded:"Yedek indirildi", bkCopied:"Kopyalandı", bkFileErr:"Dosya okunamadı", bkBadJson:"Geçersiz JSON", bkBadBackup:"Geçersiz yedek", bkLoaded:"Yedek yüklendi",
+  bkOverwriteConfirm:"Mevcut verinin üstüne yazılacak. Devam?",
+  chNamePlaceholder:"Kanal adı", chMetaVideo:"video", chMetaPlanned:"yayınlanacak", chMetaLive:"yayında",
+  secPublished:"Yayınlanan", secPlanned:"Yayınlanacak", plannedEmpty:"Yayınlanacak video yok.", bulkBtn:"⚡ Toplu tarih ata", addVideo:"+ Video ekle",
+  vTitlePlaceholder:"Video adı", bgLink:"link", bgNote:"not", stbLive:"Yayında", stbPlanned:"Yayınlanacak", vOverdue:"gecikmiş ·",
+  ck_ses:"Seslendirme", ck_srt:"SRT", ck_edit:"Edit", ck_pin:"Sabit yorum", prep:"Hazırlık",
+  ytLabel:"YouTube linki · Studio'da açılır", ytPlaceholder:"youtube.com/watch?v=… ya da video ID", openStudio:"Studio'da aç", addToCal:"Takvime ekle · 19:00",
+  noteLabel:"Not", vNotePlaceholder:"Bu video hakkında not…", noteEmpty:"(boş)", noteModalTitle:"Not",
+  icsNoLink:"Yayın günü", icsSummary:"Yayın:", icsAlarm:"Yayın",
+  flNoLink:"Link yok", flNeedDate:"Önce tarih gir", flIcsDone:"Takvim dosyası oluştu",
+  bkTitle:"Toplu tarih ata", fPattern:"Kalıp", patOdd:"Tek 1,3,5…", patEven:"Çift 2,4,6…", patAll:"Tümü",
+  fChannel:"Kanal", fDays:"Yayın günleri", fRange:"Tarih aralığı", fStart:"Başlangıç", fEnd:"Bitiş",
+  prevPick:"Kalıp, gün ve tarih aralığı seç.", prevTargets:"hedef ·", prevDays:"uygun gün →", prevAssigned:"videoya atanır", prevLeftover:"video boş kalır",
+  bulkApply:"Uygula", bulkNothing:"Atanacak bir şey yok", bulkDone:"videoya tarih atandı", bulkConfirm:"videoya tarih atanacak (yayınlanmışlara dokunulmaz). Devam?",
+  calToday:"Bugüne dön", colorTitle:"Kanal rengi",
+  searchTitle:"Ara", searchPlaceholder:"Video ara…", searchHint:"Başlık yaz, tüm kanallarda arar.", searchNone:"Eşleşme yok.", sLive:"yayında", sPlanned:"yayınlanacak", sUndated:"tarihsiz",
+  ideaPool:"Fikir Havuzu", ideaAdd:"+ Fikir ekle", ideaEmpty:"Henüz fikir yok. Üstten ekle.", ideaTitlePlaceholder:"Fikir / konu başlığı", ideaNotePlaceholder:"Not / outlier linki / açı…",
+  ideaPickChannel:"Kanal seç…", ideaToVideo:"Videoya çevir", ideaDelConfirm:"Fikir silinsin?", ideaPickFirst:"Önce kanal seç", ideaTitleEmpty:"Fikir başlığı boş", ideaAdded:"kanalına eklendi",
+  dragLabel:"sürükle"
+ },
+ en:{
+  appTitle:"Publish Board",
+  tabOverview:"Overview", tabChannels:"Channels", tabCalendar:"Calendar", tabIdeas:"Ideas",
+  save:"Save", saved:"Saved", saveFail:"Save failed", savedAt:"saved", savedNone:"not saved",
+  ovWorkload:"Workload · to publish", stToday:"Today", stWeek:"This Week", stMonth:"This Month", stOverdue:"Overdue", stPlanned:"Planned", stLive:"Published",
+  ovCapacity:"Capacity", estWorkload:"Estimated workload", hPerVideo:"hrs/video", hPerDay:"hrs/day", capWeek:"This week", capMonth:"This month", hShort:"h",
+  capNote:"Rough estimate: dated & to-publish videos × hrs/video. Capacity = hrs/day × number of days.",
+  capOver:"over capacity by ", capOverTail:"",
+  ovTempo:"Publish tempo · last 8 weeks", tempoWeek:"This week", tempoMonth:"This month", tempoTotal:"Total", tempoPub:"published",
+  tempoEmpty:"No published videos yet. Once a video is set to 'Published' it builds up here.",
+  ovBreakdown:"Channel breakdown", brkNext:"next", brkPlan:"planned", brkLive:"published", brkOverdue:"overdue",
+  ovNext5:"Next 5 publishes · all channels",
+  next5NoDated:"No dated publishes ·", next5Undated:"undated", next5More:"later", next5UndatedShort:"undated", next5InChannels:"— in Channels",
+  ovCloud:"Cloud · shared",
+  clStatus:"Status:", clLocal:"Local", clLocalTail:"(cloud off)", clCode:"code",
+  clConnecting:"Connecting…", clConnected:"Connected", clSync:"Synced", clNewBoard:"Connected · new board",
+  clBadConfig:"Bad config", clLoadFail:"Firebase failed to load (internet?)", clWriteErr:"Write error", clErr:"Error:", clConnErr:"connection",
+  clShare:"Share invite code", clDisconnect:"Disconnect", clConnect:"Connect / join cloud",
+  clNoteOn:"Anyone with the code can edit (like a shared password). Only give it to your teammate.",
+  clNoteOff:"Shared management needs a one-time Firebase (Google) setup. Tap Connect to see the steps.",
+  clSteps:"One-time setup: <b>console.firebase.google.com</b> → create project → add Web app (&lt;/&gt; icon) → copy the <b>firebaseConfig</b> object → Build &gt; Firestore Database &gt; create database (rules provided separately).",
+  clCfgLabel:"firebaseConfig (owner)", clCfgPlaceholder:'Paste the "const firebaseConfig = { ... }" block Firebase gave you, as is',
+  clCodePlaceholder:"Board code (empty = auto-generate)", clConnGen:"Connect & make code", clOr:"— or —",
+  clJoinLabel:"Join with invite code (teammate)", clJoinPlaceholder:"Paste the invite code you received", clJoin:"Join", clModalTitle:"Cloud connection",
+  clCopied:"Invite code copied", clCopyFail:"Copy failed", clConnectFirst:"Connect first", clBadInvite:"Invalid invite code",
+  clCfgUnread:"Couldn't read config — paste the block with apiKey/projectId", clDisconnected:"Disconnected", clDisconnectConfirm:"Disconnect from cloud? Data stays on this device.",
+  ovBackup:"Backup",
+  bkExport:"Export backup", bkImport:"Restore from backup", bkCopy:"Copy JSON", bkPasteToggle:"· load by pasting", bkPasteLoad:"Load pasted",
+  bkPastePlaceholder:"Paste your backup JSON here, then tap Load.",
+  bkNote:"Export: save to Files/Drive or AirDrop it. Restore overwrites your current data.",
+  bkDownloaded:"Backup downloaded", bkCopied:"Copied", bkFileErr:"Couldn't read file", bkBadJson:"Invalid JSON", bkBadBackup:"Invalid backup", bkLoaded:"Backup loaded",
+  bkOverwriteConfirm:"This overwrites your current data. Continue?",
+  chNamePlaceholder:"Channel name", chMetaVideo:"videos", chMetaPlanned:"to publish", chMetaLive:"published",
+  secPublished:"Published", secPlanned:"To publish", plannedEmpty:"No videos to publish.", bulkBtn:"⚡ Bulk assign dates", addVideo:"+ Add video",
+  vTitlePlaceholder:"Video title", bgLink:"link", bgNote:"note", stbLive:"Published", stbPlanned:"To publish", vOverdue:"overdue ·",
+  ck_ses:"Voiceover", ck_srt:"SRT", ck_edit:"Edit", ck_pin:"Pinned comment", prep:"Prep",
+  ytLabel:"YouTube link · opens in Studio", ytPlaceholder:"youtube.com/watch?v=… or video ID", openStudio:"Open in Studio", addToCal:"Add to calendar · 19:00",
+  noteLabel:"Note", vNotePlaceholder:"Note about this video…", noteEmpty:"(empty)", noteModalTitle:"Note",
+  icsNoLink:"Publish day", icsSummary:"Publish:", icsAlarm:"Publish",
+  flNoLink:"No link", flNeedDate:"Enter a date first", flIcsDone:"Calendar file created",
+  bkTitle:"Bulk assign dates", fPattern:"Pattern", patOdd:"Odd 1,3,5…", patEven:"Even 2,4,6…", patAll:"All",
+  fChannel:"Channel", fDays:"Publish days", fRange:"Date range", fStart:"Start", fEnd:"End",
+  prevPick:"Pick pattern, days and date range.", prevTargets:"targets ·", prevDays:"valid days →", prevAssigned:"will be dated", prevLeftover:"left empty",
+  bulkApply:"Apply", bulkNothing:"Nothing to assign", bulkDone:"videos dated", bulkConfirm:"videos will be dated (published untouched). Continue?",
+  calToday:"Back to today", colorTitle:"Channel color",
+  searchTitle:"Search", searchPlaceholder:"Search videos…", searchHint:"Type a title, searches all channels.", searchNone:"No matches.", sLive:"published", sPlanned:"to publish", sUndated:"undated",
+  ideaPool:"Idea Pool", ideaAdd:"+ Add idea", ideaEmpty:"No ideas yet. Add one above.", ideaTitlePlaceholder:"Idea / topic title", ideaNotePlaceholder:"Note / outlier link / angle…",
+  ideaPickChannel:"Pick channel…", ideaToVideo:"Convert to video", ideaDelConfirm:"Delete idea?", ideaPickFirst:"Pick a channel first", ideaTitleEmpty:"Idea title is empty", ideaAdded:"added",
+  dragLabel:"drag"
+ }
+};
+function t(k){var d=I18N[lang]||I18N.tr;return d[k]!=null?d[k]:(I18N.tr[k]!=null?I18N.tr[k]:k);}
+function applyI18n(){document.querySelectorAll("[data-i18n]").forEach(function(el){el.textContent=t(el.getAttribute("data-i18n"));});try{document.title=t("appTitle");}catch(e){}}
+function updateLangBtn(){var a=document.getElementById("langTR"),b=document.getElementById("langEN");if(a&&b){a.classList.toggle("on",lang==="tr");b.classList.toggle("on",lang==="en");}}
+function setLang(l){lang=(l==="en")?"en":"tr";try{localStorage.setItem("yp-lang",lang);}catch(e){}updateLangBtn();applyI18n();renderAll();}
 
 const pad = n => String(n).padStart(2,"0");
 const toYMD = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -276,23 +437,26 @@ const fmtDate = ymd => {if(!ymd)return"—";const[y,m,dd]=ymd.split("-");return 
 function defaultState(){
   return {
     channels:Array.from({length:5},(_,i)=>({id:uid(),name:`Kanal ${i+1}`,videos:[],color:PALETTE[i%PALETTE.length]})),
-    settings:{hoursPerVideo:6,hoursPerDay:6}
+    settings:{hoursPerVideo:6,hoursPerDay:6},
+    ideas:[]
   };
 }
 function migrate(s){
   s=s||{};
   s.channels=(s.channels||[]).map((c,idx)=>({
     id:c.id||uid(), name:c.name||"Kanal", color:c.color||PALETTE[idx%PALETTE.length],
-    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||"",link:v.link||"",note:v.note||"",publishedAt:v.publishedAt||""}))
+    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||"",link:v.link||"",note:v.note||"",publishedAt:v.publishedAt||"",checks:Object.assign({ses:false,srt:false,edit:false,pin:false},(v.checks&&typeof v.checks==="object")?v.checks:{})}))
   }));
   if(s.channels.length===0) s.channels=defaultState().channels;
   s.settings=Object.assign({hoursPerVideo:6,hoursPerDay:6}, s.settings||{});
+  s.ideas=Array.isArray(s.ideas)?s.ideas.map(x=>({id:x.id||uid(),title:x.title||"",note:x.note||"",ci:(x.ci===0||x.ci)?x.ci:"",star:!!x.star,createdAt:x.createdAt||Date.now()})):[];
   return s;
 }
 
 let state, savedAt=null, activeCh=0, view="overview", autoTimer=null;
 let cloud={on:false,db:null,fs:null,code:null,unsub:null,statusMsg:"",statusErr:false};
 let pendingRemote=null;
+let calMonth=new Date();calMonth.setDate(1);
 try{
   const raw=localStorage.getItem(KEY);
   if(raw){const p=JSON.parse(raw);state=migrate(p.state);savedAt=p.savedAt||null;}
@@ -301,8 +465,8 @@ try{
 
 function save(silent){
   const ts=Date.now();
-  try{ localStorage.setItem(KEY,JSON.stringify({state,savedAt:ts})); savedAt=ts; renderSavedAt(); if(!silent)flash("Kaydedildi",false); }
-  catch(e){ if(!silent)flash("Kaydedilemedi",true); }
+  try{ localStorage.setItem(KEY,JSON.stringify({state,savedAt:ts})); savedAt=ts; renderSavedAt(); if(!silent)flash(t("saved"),false); }
+  catch(e){ if(!silent)flash(t("saveFail"),true); }
   if(cloud&&cloud.on)pushCloud();
 }
 function autosave(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>save(true),1200);}
@@ -314,16 +478,16 @@ const cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).t
 
 // ---- workload ----
 function workload(){
-  const t=todayStr();const[wkS,wkE]=weekRange();const[moS,moE]=monthRange();
+  const today=todayStr();const[wkS,wkE]=weekRange();const[moS,moE]=monthRange();
   let daily=0,weekly=0,monthly=0,overdue=0,planned=0,published=0;
   for(const ch of state.channels)for(const v of ch.videos){
     if(v.status==="published"){published++;continue;}
     planned++;
     if(!v.date)continue;
-    if(v.date===t)daily++;
+    if(v.date===today)daily++;
     if(v.date>=wkS&&v.date<=wkE)weekly++;
     if(v.date>=moS&&v.date<=moE)monthly++;
-    if(v.date<t)overdue++;
+    if(v.date<today)overdue++;
   }
   return{daily,weekly,monthly,overdue,planned,published};
 }
@@ -337,13 +501,13 @@ function statEl(n,label,color,sm){
 function renderStats(){
   const w=workload();
   const top=document.getElementById("statsTop");top.innerHTML="";
-  top.appendChild(statEl(w.daily,"Bugün",cssVar("--amber")));
-  top.appendChild(statEl(w.weekly,"Bu Hafta",cssVar("--blue")));
-  top.appendChild(statEl(w.monthly,"Bu Ay",cssVar("--text")));
+  top.appendChild(statEl(w.daily,t("stToday"),cssVar("--amber")));
+  top.appendChild(statEl(w.weekly,t("stWeek"),cssVar("--blue")));
+  top.appendChild(statEl(w.monthly,t("stMonth"),cssVar("--text")));
   const bot=document.getElementById("statsBot");bot.innerHTML="";
-  bot.appendChild(statEl(w.overdue,"Geciken",cssVar("--red"),true));
-  bot.appendChild(statEl(w.planned,"Toplam plan",cssVar("--muted"),true));
-  bot.appendChild(statEl(w.published,"Yayında",cssVar("--green"),true));
+  bot.appendChild(statEl(w.overdue,t("stOverdue"),cssVar("--red"),true));
+  bot.appendChild(statEl(w.planned,t("stPlanned"),cssVar("--muted"),true));
+  bot.appendChild(statEl(w.published,t("stLive"),cssVar("--green"),true));
 }
 
 // ---- capacity ----
@@ -357,18 +521,18 @@ function renderCapacity(){
   const card=document.getElementById("capCard");card.innerHTML="";
 
   const head=document.createElement("div");head.className="caphead";
-  const lbl=document.createElement("div");lbl.style.color=cssVar("--muted");lbl.style.fontSize="13px";lbl.textContent="Tahmini iş gücü";
+  const lbl=document.createElement("div");lbl.style.color=cssVar("--muted");lbl.style.fontSize="13px";lbl.textContent=t("estWorkload");
   const setWrap=document.createElement("div");setWrap.className="capset";
-  setWrap.appendChild(numField("saat/video","hoursPerVideo"));
-  setWrap.appendChild(numField("saat/gün","hoursPerDay"));
+  setWrap.appendChild(numField(t("hPerVideo"),"hoursPerVideo"));
+  setWrap.appendChild(numField(t("hPerDay"),"hoursPerDay"));
   head.appendChild(lbl);head.appendChild(setWrap);
   card.appendChild(head);
 
-  card.appendChild(capRow("Bu hafta",weekNeed,weekCap));
-  card.appendChild(capRow("Bu ay",monthNeed,monthCap));
+  card.appendChild(capRow(t("capWeek"),weekNeed,weekCap));
+  card.appendChild(capRow(t("capMonth"),monthNeed,monthCap));
 
   const note=document.createElement("div");note.className="note";
-  note.textContent="Kaba tahmin: tarihli & yayınlanacak videolar × saat/video. Kapasite = saat/gün × gün sayısı.";
+  note.textContent=t("capNote");
   card.appendChild(note);
 }
 function numField(label,key){
@@ -393,13 +557,13 @@ function capRow(label,need,cap){
   fill.style.background=over?cssVar("--red"):need>0?cssVar("--amber"):cssVar("--green");
   bar.appendChild(fill);
   wrap.appendChild(meta);wrap.appendChild(bar);
-  if(over){const o=document.createElement("div");o.style.cssText="font-family:var(--mono);font-size:11px;color:"+cssVar("--red")+";margin-top:5px";o.textContent=`kapasiteyi ${need-cap}s aşıyor`;wrap.appendChild(o);}
+  if(over){const o=document.createElement("div");o.style.cssText="font-family:var(--mono);font-size:11px;color:"+cssVar("--red")+";margin-top:5px";o.textContent=t("capOver")+(need-cap)+t("hShort")+t("capOverTail");wrap.appendChild(o);}
   return wrap;
 }
 
 // ---- next 5 (cross-channel) ----
 function renderCalendar(){
-  const t=todayStr();
+  const today=todayStr();
   const dated=[]; let undated=0;
   state.channels.forEach((c,ci)=>c.videos.forEach(v=>{
     if(v.status==="published")return;
@@ -412,14 +576,14 @@ function renderCalendar(){
   const card=document.getElementById("calCard");card.innerHTML="";
   if(next.length===0){
     const e=document.createElement("div");e.className="calempty";
-    e.textContent=undated>0?`Tarihli yayın yok · ${undated} tarihsiz video`:"Yayınlanacak video yok.";
+    e.textContent=undated>0?(t("next5NoDated")+" "+undated+" "+t("next5Undated")):t("plannedEmpty");
     card.appendChild(e);return;
   }
   next.forEach(it=>{
     const row=document.createElement("div");row.className="calrow";
-    const od=it.date<t;
+    const od=it.date<today;
     const dot=document.createElement("span");dot.className="caldot";
-    dot.style.background=od?cssVar("--red"):it.date===t?cssVar("--amber"):cssVar("--blue");
+    dot.style.background=od?cssVar("--red"):it.date===today?cssVar("--amber"):cssVar("--blue");
     const dt=document.createElement("span");dt.className="caldate"+(od?" red":"");dt.textContent=fmtDate(it.date);
     const mid=document.createElement("div");mid.className="calmid";
     const ch=document.createElement("div");ch.className="calch";
@@ -434,8 +598,8 @@ function renderCalendar(){
   const extra=dated.length-next.length;
   if(extra>0||undated>0){
     const f=document.createElement("div");f.className="note";
-    const parts=[];if(extra>0)parts.push(`+${extra} sonraki`);if(undated>0)parts.push(`${undated} tarihsiz`);
-    f.textContent=parts.join(" · ")+" — Kanallar'da";
+    const parts=[];if(extra>0)parts.push("+"+extra+" "+t("next5More"));if(undated>0)parts.push(undated+" "+t("next5UndatedShort"));
+    f.textContent=parts.join(" · ")+" "+t("next5InChannels");
     card.appendChild(f);
   }
 }
@@ -444,8 +608,8 @@ function renderCalendar(){
 function renderBackup(){
   const card=document.getElementById("bkCard");card.innerHTML="";
   const btns=document.createElement("div");btns.className="bkbtns";
-  const exp=document.createElement("button");exp.className="bk amber";exp.textContent="Yedeği dışa aktar";exp.onclick=exportData;
-  const imp=document.createElement("button");imp.className="bk";imp.textContent="Yedekten geri yükle";
+  const exp=document.createElement("button");exp.className="bk amber";exp.textContent=t("bkExport");exp.onclick=exportData;
+  const imp=document.createElement("button");imp.className="bk";imp.textContent=t("bkImport");
   const file=document.createElement("input");file.type="file";file.accept="application/json,.json";file.style.display="none";
   file.onchange=()=>{if(file.files[0])importFile(file.files[0]);file.value="";};
   imp.onclick=()=>file.click();
@@ -453,19 +617,19 @@ function renderBackup(){
   card.appendChild(btns);card.appendChild(file);
 
   const links=document.createElement("div");
-  const copy=document.createElement("button");copy.className="linkbtn";copy.textContent="JSON'u kopyala";copy.onclick=copyData;
-  const pasteToggle=document.createElement("button");pasteToggle.className="linkbtn";pasteToggle.textContent="· yapıştırarak yükle";pasteToggle.style.marginLeft="12px";
+  const copy=document.createElement("button");copy.className="linkbtn";copy.textContent=t("bkCopy");copy.onclick=copyData;
+  const pasteToggle=document.createElement("button");pasteToggle.className="linkbtn";pasteToggle.textContent=t("bkPasteToggle");pasteToggle.style.marginLeft="12px";
   links.appendChild(copy);links.appendChild(pasteToggle);
   card.appendChild(links);
 
-  const ta=document.createElement("textarea");ta.className="paste";ta.placeholder="Yedek JSON'unu buraya yapıştır, sonra Yükle'ye bas.";
-  const loadBtn=document.createElement("button");loadBtn.className="bk";loadBtn.style.cssText="display:none;margin-top:8px;width:100%";loadBtn.textContent="Yapıştırılanı yükle";
+  const ta=document.createElement("textarea");ta.className="paste";ta.placeholder=t("bkPastePlaceholder");
+  const loadBtn=document.createElement("button");loadBtn.className="bk";loadBtn.style.cssText="display:none;margin-top:8px;width:100%";loadBtn.textContent=t("bkPasteLoad");
   pasteToggle.onclick=()=>{const sh=ta.style.display!=="block";ta.style.display=sh?"block":"none";loadBtn.style.display=sh?"block":"none";};
   loadBtn.onclick=()=>{if(ta.value.trim())applyImport(ta.value);};
   card.appendChild(ta);card.appendChild(loadBtn);
 
   const note=document.createElement("div");note.className="note";
-  note.textContent="Dışa aktar: Dosyalar/Drive'a kaydet ya da AirDrop'la. Geri yükle mevcut verinin üstüne yazar.";
+  note.textContent=t("bkNote");
   card.appendChild(note);
 }
 function exportData(){
@@ -478,20 +642,20 @@ function exportData(){
   }catch(e){}
   const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=fname;
   document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  flash("Yedek indirildi");
+  flash(t("bkDownloaded"));
 }
 function copyData(){
   const json=JSON.stringify({state},null,2);
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).then(()=>flash("Kopyalandı")).catch(()=>flash("Kopyalanamadı",true));}
-  else flash("Kopyalanamadı",true);
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).then(()=>flash(t("bkCopied"))).catch(()=>flash(t("clCopyFail"),true));}
+  else flash(t("clCopyFail"),true);
 }
-function importFile(file){const r=new FileReader();r.onload=()=>applyImport(r.result);r.onerror=()=>flash("Dosya okunamadı",true);r.readAsText(file);}
+function importFile(file){const r=new FileReader();r.onload=()=>applyImport(r.result);r.onerror=()=>flash(t("bkFileErr"),true);r.readAsText(file);}
 function applyImport(text){
-  let p;try{p=JSON.parse(text);}catch(e){flash("Geçersiz JSON",true);return;}
+  let p;try{p=JSON.parse(text);}catch(e){flash(t("bkBadJson"),true);return;}
   const ns=p.state||p;
-  if(!ns||!Array.isArray(ns.channels)){flash("Geçersiz yedek",true);return;}
-  if(!confirm("Mevcut verinin üstüne yazılacak. Devam?"))return;
-  state=migrate(ns);activeCh=0;save(true);renderAll();flash("Yedek yüklendi");
+  if(!ns||!Array.isArray(ns.channels)){flash(t("bkBadBackup"),true);return;}
+  if(!confirm(t("bkOverwriteConfirm")))return;
+  state=migrate(ns);activeCh=0;save(true);renderAll();flash(t("bkLoaded"));
 }
 
 // ---- video detail helpers ----
@@ -504,28 +668,28 @@ function studioUrl(link){
   if(/^[\w-]{11}$/.test(link))return "https://studio.youtube.com/video/"+link+"/edit";
   return link;
 }
-function openStudio(link){const u=studioUrl(link);if(!u){flash("Link yok",true);return;}window.open(u,"_blank");}
+function openStudio(link){const u=studioUrl(link);if(!u){flash(t("flNoLink"),true);return;}window.open(u,"_blank");}
 function escapeICS(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
 function downloadICS(ch,v){
-  if(!v.date){flash("Önce tarih gir",true);return;}
+  if(!v.date){flash(t("flNeedDate"),true);return;}
   const[y,m,d]=v.date.split("-");
   const start=`${y}${m}${d}T190000`,end=`${y}${m}${d}T193000`;
   const stamp=new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
-  const desc=v.link?(studioUrl(v.link)||v.link):"Yayın günü";
+  const desc=v.link?(studioUrl(v.link)||v.link):t("icsNoLink");
   const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//YayinPanosu//TR","CALSCALE:GREGORIAN","BEGIN:VEVENT",
     "UID:"+v.id+"@yayinpanosu","DTSTAMP:"+stamp,"DTSTART:"+start,"DTEND:"+end,
-    "SUMMARY:"+escapeICS("Yayın: "+v.title+" ("+ch.name+")"),
+    "SUMMARY:"+escapeICS(t("icsSummary")+" "+v.title+" ("+ch.name+")"),
     "DESCRIPTION:"+escapeICS(desc),
-    "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:Yayın","TRIGGER:-PT1H","END:VALARM",
+    "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+t("icsAlarm"),"TRIGGER:-PT1H","END:VALARM",
     "END:VEVENT","END:VCALENDAR"].join("\r\n");
   const fname=("yayin-"+(v.title||"video")).replace(/[^\w-]+/g,"_").slice(0,40)+".ics";
   const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
   try{const f=new File([blob],fname,{type:"text/calendar"});
     if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:fname}).catch(()=>{});return;}}catch(e){}
   const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  flash("Takvim dosyası oluştu");
+  flash(t("flIcsDone"));
 }
-function showNote(v){openModal(v.title||"Not", v.note||"(boş)");}
+function showNote(v){openModal(v.title||t("noteModalTitle"), v.note||t("noteEmpty"));}
 function openModal(title,text){document.getElementById("modalTitle").textContent=title;const b=document.getElementById("modalBody");b.innerHTML="";b.textContent=text;document.getElementById("modal").classList.add("open");}
 function openModalNode(title,node){document.getElementById("modalTitle").textContent=title;const b=document.getElementById("modalBody");b.innerHTML="";b.appendChild(node);document.getElementById("modal").classList.add("open");}
 function closeModal(){document.getElementById("modal").classList.remove("open");}
@@ -549,60 +713,60 @@ function autoDateCompute(cfg){
 }
 function autoDateApply(cfg){
   const r=autoDateCompute(cfg);
-  if(r.assignCount===0){flash("Atanacak bir şey yok",true);return;}
-  if(!confirm(`${r.assignCount} videoya tarih atanacak (yayınlanmışlara dokunulmaz). Devam?`))return;
+  if(r.assignCount===0){flash(t("bulkNothing"),true);return;}
+  if(!confirm(r.assignCount+" "+t("bulkConfirm")))return;
   const ch=state.channels[cfg.ci];
   for(let k=0;k<r.assignCount;k++) ch.videos[r.targets[k].i].date=r.occ[k];
   activeCh=cfg.ci;collapsed.planned=false;
   closeModal();renderTabs();renderPanel();refreshOverview();save(true);
-  flash(r.assignCount+" videoya tarih atandı");
+  flash(r.assignCount+" "+t("bulkDone"));
 }
 function fieldWrap(label){const f=document.createElement("div");f.className="fld";const l=document.createElement("label");l.textContent=label;f.appendChild(l);return f;}
 function openAutoDateModal(defaultCi){
   const cfg={pattern:"all",ci:defaultCi,days:new Set(),start:"",end:""};
   const wrap=document.createElement("div");
 
-  const f1=fieldWrap("Kalıp");const seg=document.createElement("div");seg.className="seg";
-  [["odd","Tek 1,3,5…"],["even","Çift 2,4,6…"],["all","Tümü"]].forEach(([k,tx])=>{
+  const f1=fieldWrap(t("fPattern"));const seg=document.createElement("div");seg.className="seg";
+  [["odd",t("patOdd")],["even",t("patEven")],["all",t("patAll")]].forEach(([k,tx])=>{
     const b=document.createElement("button");b.textContent=tx;b.className=cfg.pattern===k?"on":"";
     b.onclick=()=>{cfg.pattern=k;[...seg.children].forEach(c=>c.className="");b.className="on";upd();};
     seg.appendChild(b);
   });
   f1.appendChild(seg);wrap.appendChild(f1);
 
-  const f2=fieldWrap("Kanal");const sel=document.createElement("select");sel.className="fsel";
+  const f2=fieldWrap(t("fChannel"));const sel=document.createElement("select");sel.className="fsel";
   state.channels.forEach((c,i)=>{const o=document.createElement("option");o.value=i;o.textContent=c.name;if(i===defaultCi)o.selected=true;sel.appendChild(o);});
   sel.onchange=()=>{cfg.ci=Number(sel.value);upd();};
   f2.appendChild(sel);wrap.appendChild(f2);
 
-  const f3=fieldWrap("Yayın günleri");const days=document.createElement("div");days.className="days";
-  [[1,"Pzt"],[2,"Sal"],[3,"Çar"],[4,"Per"],[5,"Cum"],[6,"Cmt"],[0,"Paz"]].forEach(([d,tx])=>{
+  const f3=fieldWrap(t("fDays"));const days=document.createElement("div");days.className="days";
+  [[1,WD[lang][0]],[2,WD[lang][1]],[3,WD[lang][2]],[4,WD[lang][3]],[5,WD[lang][4]],[6,WD[lang][5]],[0,WD[lang][6]]].forEach(([d,tx])=>{
     const b=document.createElement("button");b.className="day";b.textContent=tx;
     b.onclick=()=>{if(cfg.days.has(d)){cfg.days.delete(d);b.classList.remove("on");}else{cfg.days.add(d);b.classList.add("on");}upd();};
     days.appendChild(b);
   });
   f3.appendChild(days);wrap.appendChild(f3);
 
-  const f4=fieldWrap("Tarih aralığı");const r2=document.createElement("div");r2.className="frow2";
+  const f4=fieldWrap(t("fRange"));const r2=document.createElement("div");r2.className="frow2";
   const sIn=document.createElement("input");sIn.type="date";sIn.className="fdate";sIn.onchange=()=>{cfg.start=sIn.value;upd();};
   const eIn=document.createElement("input");eIn.type="date";eIn.className="fdate";eIn.onchange=()=>{cfg.end=eIn.value;upd();};
-  const sd=document.createElement("div");sd.appendChild(mini("Başlangıç"));sd.appendChild(sIn);
-  const ed=document.createElement("div");ed.appendChild(mini("Bitiş"));ed.appendChild(eIn);
+  const sd=document.createElement("div");sd.appendChild(mini(t("fStart")));sd.appendChild(sIn);
+  const ed=document.createElement("div");ed.appendChild(mini(t("fEnd")));ed.appendChild(eIn);
   r2.appendChild(sd);r2.appendChild(ed);f4.appendChild(r2);wrap.appendChild(f4);
 
   const prev=document.createElement("div");prev.className="prev";wrap.appendChild(prev);
-  const apply=document.createElement("button");apply.className="applybtn";apply.textContent="Uygula";apply.onclick=()=>autoDateApply(cfg);
+  const apply=document.createElement("button");apply.className="applybtn";apply.textContent=t("bulkApply");apply.onclick=()=>autoDateApply(cfg);
   wrap.appendChild(apply);
 
   function mini(t){const s=document.createElement("div");s.style.cssText="font-size:10px;color:var(--faint);font-family:var(--mono);margin-bottom:4px";s.textContent=t;return s;}
   function upd(){
-    if(!cfg.start||!cfg.end||cfg.days.size===0){prev.innerHTML="Kalıp, gün ve tarih aralığı seç.";return;}
+    if(!cfg.start||!cfg.end||cfg.days.size===0){prev.innerHTML=t("prevPick");return;}
     const r=autoDateCompute(cfg);
-    let h=`${r.targets.length} hedef · ${r.occ.length} uygun gün → <b>${r.assignCount}</b> videoya atanır`;
-    if(r.targets.length>r.occ.length) h+=` · ${r.targets.length-r.occ.length} video boş kalır`;
+    let h=r.targets.length+" "+t("prevTargets")+" "+r.occ.length+" "+t("prevDays")+" <b>"+r.assignCount+"</b> "+t("prevAssigned");
+    if(r.targets.length>r.occ.length) h+=" · "+(r.targets.length-r.occ.length)+" "+t("prevLeftover");
     prev.innerHTML=h;
   }
-  openModalNode("Toplu tarih ata",wrap);upd();
+  openModalNode(t("bkTitle"),wrap);upd();
 }
 
 // ---- channels ----
@@ -636,7 +800,7 @@ function renderPanel(){
   const panel=document.getElementById("panel");panel.innerHTML="";
   const nameRow=document.createElement("div");nameRow.className="colorrow";
   const cdot=document.createElement("button");cdot.className="colordot";cdot.style.background=ch.color||"#888";cdot.onclick=()=>openColorModal(activeCh);
-  const name=document.createElement("input");name.className="chname";name.value=ch.name;name.placeholder="Kanal adı";
+  const name=document.createElement("input");name.className="chname";name.value=ch.name;name.placeholder=t("chNamePlaceholder");
   name.oninput=()=>{ch.name=name.value;const tab=document.querySelectorAll("#tabs .tab")[activeCh];if(tab){const t=tab.querySelector(".tablabel");if(t)t.textContent=name.value||" ";}autosave();};
   nameRow.appendChild(cdot);nameRow.appendChild(name);
   panel.appendChild(nameRow);
@@ -645,11 +809,11 @@ function renderPanel(){
   const publishedArr=ch.videos.map((v,i)=>({v,i})).filter(o=>o.v.status==="published");
 
   const meta=document.createElement("div");meta.className="chmeta";
-  meta.textContent=`${ch.videos.length} video · ${plannedArr.length} yayınlanacak · ${publishedArr.length} yayında`;
+  meta.textContent=ch.videos.length+" "+t("chMetaVideo")+" · "+plannedArr.length+" "+t("chMetaPlanned")+" · "+publishedArr.length+" "+t("chMetaLive");
   panel.appendChild(meta);
 
   if(publishedArr.length){
-    panel.appendChild(sectHeader("Yayınlanan",publishedArr.length,"published",cssVar("--green")));
+    panel.appendChild(sectHeader(t("secPublished"),publishedArr.length,"published",cssVar("--green")));
     if(!collapsed.published){
       const wrap=document.createElement("div");wrap.className="vids";
       publishedArr.slice().sort((a,b)=>(b.v.date||"").localeCompare(a.v.date||"")).forEach(o=>wrap.appendChild(videoRow(ch,o.v,o.i,{group:"published"})));
@@ -657,15 +821,15 @@ function renderPanel(){
     }
   }
 
-  panel.appendChild(sectHeader("Yayınlanacak",plannedArr.length,"planned",cssVar("--amber")));
+  panel.appendChild(sectHeader(t("secPlanned"),plannedArr.length,"planned",cssVar("--amber")));
   if(!collapsed.planned){
-    if(plannedArr.length){const bd=document.createElement("button");bd.className="bulkbtn";bd.textContent="⚡ Toplu tarih ata";bd.onclick=()=>openAutoDateModal(activeCh);panel.appendChild(bd);}
+    if(plannedArr.length){const bd=document.createElement("button");bd.className="bulkbtn";bd.textContent=t("bulkBtn");bd.onclick=()=>openAutoDateModal(activeCh);panel.appendChild(bd);}
     const wrap=document.createElement("div");wrap.className="vids";
-    if(plannedArr.length===0){const e=document.createElement("div");e.className="empty";e.textContent="Yayınlanacak video yok.";wrap.appendChild(e);}
+    if(plannedArr.length===0){const e=document.createElement("div");e.className="empty";e.textContent=t("plannedEmpty");wrap.appendChild(e);}
     plannedArr.forEach((o,k)=>wrap.appendChild(videoRow(ch,o.v,o.i,{group:"planned",pos:k,planned:plannedArr})));
     panel.appendChild(wrap);
-    const add=document.createElement("button");add.className="addbtn";add.textContent="+ Video ekle";
-    add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:"",link:"",note:"",publishedAt:""});collapsed.planned=false;renderPanel();renderTabs();refreshOverview();autosave();};
+    const add=document.createElement("button");add.className="addbtn";add.textContent=t("addVideo");
+    add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:"",link:"",note:"",publishedAt:"",checks:{ses:false,srt:false,edit:false,pin:false}});collapsed.planned=false;renderPanel();renderTabs();refreshOverview();autosave();};
     panel.appendChild(add);
   }
 }
@@ -680,17 +844,20 @@ function videoRow(ch,v,arrIdx,opts){
   if(grp==="published"){idx.textContent="✓";idx.style.color=cssVar("--green");}
   else idx.textContent="#"+((opts.pos||0)+1);
   const dot=document.createElement("span");dot.className="dot";
-  const title=document.createElement("input");title.className="vtitle"+(pub?" pub":"");title.value=v.title;title.placeholder="Video adı";
+  const title=document.createElement("input");title.className="vtitle"+(pub?" pub":"");title.value=v.title;title.placeholder=t("vTitlePlaceholder");
   title.oninput=()=>{v.title=title.value;autosave();};
-  const linkBadge=document.createElement("button");linkBadge.className="badge link";linkBadge.textContent="link";linkBadge.onclick=()=>openStudio(v.link);
-  const noteBadge=document.createElement("button");noteBadge.className="badge note";noteBadge.textContent="not";noteBadge.onclick=()=>showNote(v);
+  const linkBadge=document.createElement("button");linkBadge.className="badge link";linkBadge.textContent=t("bgLink");linkBadge.onclick=()=>openStudio(v.link);
+  const noteBadge=document.createElement("button");noteBadge.className="badge note";noteBadge.textContent=t("bgNote");noteBadge.onclick=()=>showNote(v);
   const updBadges=()=>{linkBadge.style.display=(v.link&&v.link.trim())?"inline-flex":"none";noteBadge.style.display=(v.note&&v.note.trim())?"inline-flex":"none";};
+  let chkBadge=null;
+  if(grp==="planned"){chkBadge=document.createElement("span");chkBadge.className="badge chk";}
+  function updChk(){if(!chkBadge)return;const done=CHECK_STEPS.reduce((n,s)=>n+((v.checks&&v.checks[s[0]])?1:0),0);chkBadge.textContent=done+"/4";const full=done===4;chkBadge.style.color=full?cssVar("--green"):cssVar("--faint");chkBadge.style.borderColor=full?"rgba(52,211,153,.45)":cssVar("--line");}
   const chev=document.createElement("button");chev.className="chev";chev.textContent=isOpen?"⌃":"⌄";
-  rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);rtop.appendChild(linkBadge);rtop.appendChild(noteBadge);rtop.appendChild(chev);
+  rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);rtop.appendChild(linkBadge);rtop.appendChild(noteBadge);if(chkBadge)rtop.appendChild(chkBadge);rtop.appendChild(chev);
   row.appendChild(rtop);
 
   const rbot=document.createElement("div");rbot.className="rbot";
-  const sbtn=document.createElement("button");sbtn.className="statusbtn "+(pub?"pub":"plan");sbtn.textContent=pub?"Yayında":"Yayınlanacak";
+  const sbtn=document.createElement("button");sbtn.className="statusbtn "+(pub?"pub":"plan");sbtn.textContent=pub?t("stbLive"):t("stbPlanned");
   sbtn.onclick=()=>{
     if(pub){v.status="planned";v.publishedAt="";collapsed.planned=false;}
     else{v.status="published";if(!v.publishedAt)v.publishedAt=todayStr();collapsed.published=false;}
@@ -700,7 +867,7 @@ function videoRow(ch,v,arrIdx,opts){
   date.onchange=()=>{v.date=date.value;applyOverdue();refreshOverview();autosave();};
   const actions=document.createElement("div");actions.className="actions";
   if(grp==="planned"){
-    const handle=document.createElement("button");handle.className="drag";handle.textContent="≡";handle.setAttribute("aria-label","sürükle");
+    const handle=document.createElement("button");handle.className="drag";handle.textContent="≡";handle.setAttribute("aria-label",t("dragLabel"));
     const k=opts.pos||0;
     handle.addEventListener("pointerdown",e=>startDrag(e,row,ch,k));
     handle.addEventListener("pointermove",moveDrag);
@@ -714,28 +881,33 @@ function videoRow(ch,v,arrIdx,opts){
   const overEl=document.createElement("div");overEl.className="overtxt";overEl.style.display="none";row.appendChild(overEl);
 
   const detail=document.createElement("div");detail.className="vdetail"+(isOpen?" open":"");
-  const ll=document.createElement("label");ll.textContent="YouTube linki · Studio'da açılır";
-  const linkIn=document.createElement("input");linkIn.className="vinput";linkIn.value=v.link||"";linkIn.placeholder="youtube.com/watch?v=… ya da video ID";
+  if(!v.checks)v.checks={ses:false,srt:false,edit:false,pin:false};
+  const hl=document.createElement("label");hl.textContent=t("prep");
+  const chkRow=document.createElement("div");chkRow.className="chkrow";
+  CHECK_STEPS.forEach(s=>{const c=document.createElement("button");c.className="chk"+(v.checks[s[0]]?" on":"");c.textContent=t("ck_"+s[0]);c.onclick=()=>{v.checks[s[0]]=!v.checks[s[0]];c.classList.toggle("on",v.checks[s[0]]);updChk();autosave();};chkRow.appendChild(c);});
+  detail.appendChild(hl);detail.appendChild(chkRow);
+  const ll=document.createElement("label");ll.textContent=t("ytLabel");
+  const linkIn=document.createElement("input");linkIn.className="vinput";linkIn.value=v.link||"";linkIn.placeholder=t("ytPlaceholder");
   linkIn.oninput=()=>{v.link=linkIn.value;updBadges();autosave();};
   const lrow=document.createElement("div");lrow.className="vdrow";
-  const openBtn=document.createElement("button");openBtn.className="vbtn b";openBtn.textContent="Studio'da aç";openBtn.onclick=()=>openStudio(v.link);
-  const calBtn=document.createElement("button");calBtn.className="vbtn g";calBtn.textContent="Takvime ekle · 19:00";calBtn.onclick=()=>downloadICS(ch,v);
+  const openBtn=document.createElement("button");openBtn.className="vbtn b";openBtn.textContent=t("openStudio");openBtn.onclick=()=>openStudio(v.link);
+  const calBtn=document.createElement("button");calBtn.className="vbtn g";calBtn.textContent=t("addToCal");calBtn.onclick=()=>downloadICS(ch,v);
   lrow.appendChild(openBtn);lrow.appendChild(calBtn);
-  const nl=document.createElement("label");nl.textContent="Not";
-  const noteIn=document.createElement("textarea");noteIn.className="vnote";noteIn.value=v.note||"";noteIn.placeholder="Bu video hakkında not…";
+  const nl=document.createElement("label");nl.textContent=t("noteLabel");
+  const noteIn=document.createElement("textarea");noteIn.className="vnote";noteIn.value=v.note||"";noteIn.placeholder=t("vNotePlaceholder");
   noteIn.oninput=()=>{v.note=noteIn.value;updBadges();autosave();};
   detail.appendChild(ll);detail.appendChild(linkIn);detail.appendChild(lrow);detail.appendChild(nl);detail.appendChild(noteIn);
   row.appendChild(detail);
 
   chev.onclick=()=>{const op=detail.classList.toggle("open");chev.textContent=op?"⌃":"⌄";if(op)expandedIds.add(v.id);else expandedIds.delete(v.id);};
-  updBadges();
+  updBadges();updChk();
 
   function applyOverdue(){
     const od=!pub&&v.date&&v.date<todayStr();
     row.classList.toggle("overdue",od);
     date.className="datein"+(od?" overdue":"");
     dot.style.background=pub?cssVar("--green"):od?cssVar("--red"):cssVar("--amber");
-    if(od){overEl.style.display="";overEl.textContent="gecikmiş · "+fmtDate(v.date);}else overEl.style.display="none";
+    if(od){overEl.style.display="";overEl.textContent=t("vOverdue")+" "+fmtDate(v.date);}else overEl.style.display="none";
   }
   applyOverdue();
   return row;
@@ -748,8 +920,14 @@ function setView(v){
   view=v;
   document.getElementById("overview").classList.toggle("active",v==="overview");
   document.getElementById("channels").classList.toggle("active",v==="channels");
+  document.getElementById("calendarView").classList.toggle("active",v==="calendar");
+  document.getElementById("ideasView").classList.toggle("active",v==="ideas");
   document.getElementById("vtabOverview").classList.toggle("active",v==="overview");
   document.getElementById("vtabChannels").classList.toggle("active",v==="channels");
+  document.getElementById("vtabCalendar").classList.toggle("active",v==="calendar");
+  document.getElementById("vtabIdeas").classList.toggle("active",v==="ideas");
+  if(v==="calendar")renderCalendarView();
+  if(v==="ideas")renderIdeas();
   window.scrollTo(0,0);
 }
 function goToChannel(ci){activeCh=ci;renderTabs();renderPanel();setView("channels");}
@@ -802,13 +980,13 @@ function searchResults(q){
 }
 function openSearchModal(){
   const wrap=document.createElement("div");
-  const inp=document.createElement("input");inp.className="vinput";inp.placeholder="Video ara…";inp.style.marginBottom="12px";
+  const inp=document.createElement("input");inp.className="vinput";inp.placeholder=t("searchPlaceholder");inp.style.marginBottom="12px";
   const res=document.createElement("div");
   function render(){
     res.innerHTML="";
-    if(!inp.value.trim()){const n=document.createElement("div");n.className="note";n.textContent="Başlık yaz, tüm kanallarda arar.";res.appendChild(n);return;}
+    if(!inp.value.trim()){const n=document.createElement("div");n.className="note";n.textContent=t("searchHint");res.appendChild(n);return;}
     const r=searchResults(inp.value);
-    if(r.length===0){const n=document.createElement("div");n.className="note";n.textContent="Eşleşme yok.";res.appendChild(n);return;}
+    if(r.length===0){const n=document.createElement("div");n.className="note";n.textContent=t("searchNone");res.appendChild(n);return;}
     r.forEach(it=>{
       const row=document.createElement("div");row.className="sres";
       const dot=document.createElement("span");dot.className="caldot";dot.style.background=it.c.color||"#888";
@@ -817,7 +995,7 @@ function openSearchModal(){
       const vd=document.createElement("div");vd.className="calvid";vd.textContent=it.v.title;
       mid.appendChild(ch);mid.appendChild(vd);
       const st=document.createElement("span");st.className="srest";
-      const pubd=it.v.status==="published";st.textContent=pubd?"yayında":(it.v.date?fmtDate(it.v.date):"tarihsiz");
+      const pubd=it.v.status==="published";st.textContent=pubd?t("sLive"):(it.v.date?fmtDate(it.v.date):t("sUndated"));
       st.style.color=pubd?cssVar("--green"):cssVar("--muted");
       row.appendChild(dot);row.appendChild(mid);row.appendChild(st);
       row.onclick=()=>jumpToVideo(it.ci,it.v.id);
@@ -826,7 +1004,7 @@ function openSearchModal(){
   }
   inp.oninput=render;
   wrap.appendChild(inp);wrap.appendChild(res);
-  openModalNode("Ara",wrap);render();
+  openModalNode(t("searchTitle"),wrap);render();
   setTimeout(()=>inp.focus(),50);
 }
 function refreshOverview(){renderStats();renderCapacity();renderTempo();renderBreakdown();renderCalendar();}
@@ -845,7 +1023,7 @@ function renderTempo(){
   let wk=0,mo=0;dates.forEach(d=>{if(d>=wkS&&d<=wkE)wk++;if(d>=moS&&d<=moE)mo++;});
 
   const sum=document.createElement("div");sum.className="temposum";
-  sum.innerHTML=`Bu hafta <b>${wk}</b> · Bu ay <b>${mo}</b> · Toplam <b>${dates.length}</b> yayın`;
+  sum.innerHTML=t("tempoWeek")+" <b>"+wk+"</b> · "+t("tempoMonth")+" <b>"+mo+"</b> · "+t("tempoTotal")+" <b>"+dates.length+"</b> "+t("tempoPub");
   card.appendChild(sum);
 
   const bars=document.createElement("div");bars.className="tempobars";
@@ -861,26 +1039,26 @@ function renderTempo(){
   buckets.forEach(b=>{const l=document.createElement("div");l.className="tlab";l.textContent=b.label;labs.appendChild(l);});
   card.appendChild(labs);
 
-  if(dates.length===0){const e=document.createElement("div");e.className="note";e.style.marginTop="10px";e.textContent="Henüz yayınlanan video yok. Bir video 'Yayında' olunca burada birikir.";card.appendChild(e);}
+  if(dates.length===0){const e=document.createElement("div");e.className="note";e.style.marginTop="10px";e.textContent=t("tempoEmpty");card.appendChild(e);}
 }
 
 function renderBreakdown(){
-  const t=todayStr();
+  const today=todayStr();
   const card=document.getElementById("brkCard");if(!card)return;card.innerHTML="";
   state.channels.forEach((c,ci)=>{
     const planned=c.videos.filter(v=>v.status!=="published");
     const published=c.videos.length-planned.length;
-    const overdue=planned.filter(v=>v.date&&v.date<t).length;
-    const upcoming=planned.map(v=>v.date).filter(d=>d&&d>=t).sort();
+    const overdue=planned.filter(v=>v.date&&v.date<today).length;
+    const upcoming=planned.map(v=>v.date).filter(d=>d&&d>=today).sort();
     const nextD=upcoming.length?upcoming[0]:"";
     const row=document.createElement("div");row.className="brkrow";
     const top=document.createElement("div");top.className="brktop";
     const dot=document.createElement("span");dot.className="brkdot";dot.style.background=c.color||"#888";
     const nm=document.createElement("span");nm.className="brkname";nm.textContent=c.name;
-    const nx=document.createElement("span");nx.className="brknext";nx.textContent=nextD?("sıradaki "+fmtDate(nextD)):"sıradaki —";
+    const nx=document.createElement("span");nx.className="brknext";nx.textContent=nextD?(t("brkNext")+" "+fmtDate(nextD)):(t("brkNext")+" —");
     top.appendChild(dot);top.appendChild(nm);top.appendChild(nx);
     const st=document.createElement("div");st.className="brkstats";
-    st.innerHTML=`${planned.length} plan · ${published} yayında`+(overdue>0?` · <span class="od">${overdue} geciken</span>`:"");
+    st.innerHTML=planned.length+" "+t("brkPlan")+" · "+published+" "+t("brkLive")+(overdue>0?(" · <span class=\"od\">"+overdue+" "+t("brkOverdue")+"</span>"):"");
     row.appendChild(top);row.appendChild(st);
     row.onclick=()=>goToChannel(ci);
     card.appendChild(row);
@@ -894,10 +1072,118 @@ function openColorModal(ci){
     b.onclick=()=>{ch.color=col;closeModal();renderTabs();renderPanel();refreshOverview();autosave();};
     wrap.appendChild(b);
   });
-  openModalNode("Kanal rengi",wrap);
+  openModalNode(t("colorTitle"),wrap);
 }
-function renderSavedAt(){document.getElementById("savedAt").textContent=savedAt?("kayıt "+new Date(savedAt).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})):"kayıt yok";}
-function renderAll(){refreshOverview();renderCloud();renderBackup();renderTabs();renderPanel();renderSavedAt();}
+function renderSavedAt(){document.getElementById("savedAt").textContent=savedAt?(t("savedAt")+" "+new Date(savedAt).toLocaleTimeString(lang==="en"?"en-GB":"tr-TR",{hour:"2-digit",minute:"2-digit"})):t("savedNone");}
+function renderAll(){refreshOverview();renderCloud();renderBackup();renderTabs();renderPanel();renderCalendarView();renderIdeas();renderSavedAt();}
+
+// ---- ideas (fikir havuzu) ----
+function renderIdeas(){
+  const root=document.getElementById("ideasView");if(!root)return;root.innerHTML="";
+  if(!state.ideas)state.ideas=[];
+  const head=document.createElement("div");head.className="pad";head.innerHTML='<div class="label">'+t("ideaPool")+'</div>';root.appendChild(head);
+  const addWrap=document.createElement("div");addWrap.style.padding="0 16px";
+  const add=document.createElement("button");add.className="addbtn";add.style.marginTop="0";add.textContent=t("ideaAdd");
+  add.onclick=()=>{state.ideas.unshift({id:uid(),title:"",note:"",ci:"",star:false,createdAt:Date.now()});renderIdeas();autosave();};
+  addWrap.appendChild(add);root.appendChild(addWrap);
+  const list=document.createElement("div");list.style.padding="12px 16px 0";
+  if(state.ideas.length===0){const e=document.createElement("div");e.className="empty";e.textContent=t("ideaEmpty");list.appendChild(e);}
+  state.ideas.slice().sort((a,b)=>(b.star?1:0)-(a.star?1:0)||(b.createdAt||0)-(a.createdAt||0)).forEach(idea=>list.appendChild(ideaCard(idea)));
+  root.appendChild(list);
+}
+function ideaCard(idea){
+  const card=document.createElement("div");card.className="ideacard";
+  const r1=document.createElement("div");r1.className="irow1";
+  const star=document.createElement("button");star.className="istar"+(idea.star?" on":"");star.textContent=idea.star?"★":"☆";
+  star.onclick=()=>{idea.star=!idea.star;renderIdeas();autosave();};
+  const title=document.createElement("input");title.className="ititle";title.value=idea.title;title.placeholder=t("ideaTitlePlaceholder");
+  title.oninput=()=>{idea.title=title.value;autosave();};
+  const del=document.createElement("button");del.className="ibtn danger";del.textContent="✕";
+  del.onclick=()=>{if(confirm(t("ideaDelConfirm"))){state.ideas=state.ideas.filter(x=>x.id!==idea.id);renderIdeas();autosave();}};
+  r1.appendChild(star);r1.appendChild(title);r1.appendChild(del);card.appendChild(r1);
+  const note=document.createElement("textarea");note.className="inote";note.value=idea.note||"";note.placeholder=t("ideaNotePlaceholder");
+  note.oninput=()=>{idea.note=note.value;autosave();};
+  card.appendChild(note);
+  const r3=document.createElement("div");r3.className="irow3";
+  const sel=document.createElement("select");sel.className="fsel";
+  const o0=document.createElement("option");o0.value="";o0.textContent=t("ideaPickChannel");sel.appendChild(o0);
+  state.channels.forEach((c,i)=>{const o=document.createElement("option");o.value=i;o.textContent=c.name;if(String(idea.ci)===String(i))o.selected=true;sel.appendChild(o);});
+  sel.onchange=()=>{idea.ci=sel.value===""?"":Number(sel.value);autosave();};
+  const conv=document.createElement("button");conv.className="convbtn";conv.textContent=t("ideaToVideo");conv.onclick=()=>ideaToVideo(idea);
+  r3.appendChild(sel);r3.appendChild(conv);card.appendChild(r3);
+  return card;
+}
+function ideaToVideo(idea){
+  if(idea.ci===""||idea.ci==null){flash(t("ideaPickFirst"),true);return;}
+  const ch=state.channels[idea.ci];if(!ch)return;
+  if(!(idea.title&&idea.title.trim())){flash(t("ideaTitleEmpty"),true);return;}
+  if(!confirm(lang==="en"?("Add \""+idea.title+"\" as a planned video to "+ch.name+"?"):("\""+idea.title+"\" → "+ch.name+" kanalına planlı video olarak eklensin?")))return;
+  ch.videos.push({id:uid(),title:idea.title.trim(),status:"planned",date:"",link:"",note:idea.note||"",publishedAt:"",checks:{ses:false,srt:false,edit:false,pin:false}});
+  state.ideas=state.ideas.filter(x=>x.id!==idea.id);
+  activeCh=idea.ci;collapsed.planned=false;
+  renderIdeas();renderTabs();renderPanel();refreshOverview();save(true);
+  flash(lang==="en"?("Idea added to "+ch.name):("Fikir "+ch.name+" "+t("ideaAdded")));
+}
+
+// ---- monthly calendar view ----
+function renderCalendarView(){
+  const root=document.getElementById("calendarView");if(!root)return;root.innerHTML="";
+  const y=calMonth.getFullYear(),m=calMonth.getMonth();
+  const byDay={};
+  state.channels.forEach((c,ci)=>c.videos.forEach(v=>{
+    if(!v.date)return;const p=v.date.split("-").map(Number);
+    if(p[0]===y&&p[1]===m+1){(byDay[p[2]]=byDay[p[2]]||[]).push({ci,color:c.color,ch:c.name,title:v.title,status:v.status,id:v.id});}
+  }));
+  const nav=document.createElement("div");nav.className="calnav";
+  const prev=document.createElement("button");prev.className="navbtn";prev.textContent="‹";prev.onclick=()=>{calMonth.setMonth(calMonth.getMonth()-1);renderCalendarView();};
+  const lbl=document.createElement("div");lbl.className="calmonth";lbl.textContent=MONTHS[lang][m]+" "+y;
+  const next=document.createElement("button");next.className="navbtn";next.textContent="›";next.onclick=()=>{calMonth.setMonth(calMonth.getMonth()+1);renderCalendarView();};
+  nav.appendChild(prev);nav.appendChild(lbl);nav.appendChild(next);root.appendChild(nav);
+  const today=document.createElement("button");today.className="todaybtn";today.textContent=t("calToday");today.onclick=()=>{calMonth=new Date();calMonth.setDate(1);renderCalendarView();};root.appendChild(today);
+  const wk=document.createElement("div");wk.className="calgridhead";
+  [WD[lang][0],WD[lang][1],WD[lang][2],WD[lang][3],WD[lang][4],WD[lang][5],WD[lang][6]].forEach(d=>{const e=document.createElement("div");e.className="wkh";e.textContent=d;wk.appendChild(e);});
+  root.appendChild(wk);
+  const grid=document.createElement("div");grid.className="calgrid";
+  const firstDow=(new Date(y,m,1).getDay()+6)%7;
+  const daysInM=new Date(y,m+1,0).getDate();
+  const tStr=todayStr();
+  for(let i=0;i<firstDow;i++){const b=document.createElement("div");b.className="celld blank";grid.appendChild(b);}
+  for(let d=1;d<=daysInM;d++){
+    const cell=document.createElement("div");cell.className="celld";
+    const ds=y+"-"+pad(m+1)+"-"+pad(d);
+    if(ds===tStr)cell.classList.add("istoday");
+    const dn=document.createElement("div");dn.className="daynum";dn.textContent=d;cell.appendChild(dn);
+    const items=byDay[d]||[];
+    if(items.length){
+      const dots=document.createElement("div");dots.className="daydots";
+      items.slice(0,4).forEach(it=>{const dot=document.createElement("span");dot.className="ddot"+(it.status==="published"?" pub":"");dot.style.background=it.color||"#888";dots.appendChild(dot);});
+      if(items.length>4){const more=document.createElement("span");more.className="dmore";more.textContent="+"+(items.length-4);dots.appendChild(more);}
+      cell.appendChild(dots);cell.classList.add("has");
+      cell.onclick=()=>openDayModal(ds,items);
+    }
+    grid.appendChild(cell);
+  }
+  root.appendChild(grid);
+  const leg=document.createElement("div");leg.className="callegend";
+  state.channels.forEach(c=>{const e=document.createElement("span");e.className="legitem";const dt=document.createElement("span");dt.className="ddot";dt.style.background=c.color;e.appendChild(dt);e.appendChild(document.createTextNode(c.name));leg.appendChild(e);});
+  root.appendChild(leg);
+}
+function openDayModal(ds,items){
+  const wrap=document.createElement("div");
+  items.forEach(it=>{
+    const row=document.createElement("div");row.className="sres";
+    const dot=document.createElement("span");dot.className="caldot";dot.style.background=it.color||"#888";
+    const mid=document.createElement("div");mid.className="calmid";
+    const ch=document.createElement("div");ch.className="calch";ch.textContent=it.ch;
+    const vd=document.createElement("div");vd.className="calvid";vd.textContent=it.title;
+    mid.appendChild(ch);mid.appendChild(vd);
+    const st=document.createElement("span");st.className="srest";const pub=it.status==="published";st.textContent=pub?t("sLive"):t("sPlanned");st.style.color=pub?cssVar("--green"):cssVar("--amber");
+    row.appendChild(dot);row.appendChild(mid);row.appendChild(st);
+    row.onclick=()=>jumpToVideo(it.ci,it.id);
+    wrap.appendChild(row);
+  });
+  openModalNode(fmtDate(ds),wrap);
+}
 
 // ---- cloud sync (ortak kod) ----
 const FB_VER="10.12.5";
@@ -906,8 +1192,8 @@ function cloudStatus(msg,err){cloud.statusMsg=msg;cloud.statusErr=!!err;renderCl
 async function connectCloud(){
   const cfgRaw=localStorage.getItem("cloudConfig"),code=localStorage.getItem("boardCode");
   if(!cfgRaw||!code)return;
-  let config;try{config=JSON.parse(cfgRaw);}catch(e){cloudStatus("Yapılandırma bozuk",true);return;}
-  cloudStatus("Bağlanılıyor…",false);
+  let config;try{config=JSON.parse(cfgRaw);}catch(e){cloudStatus(t("clBadConfig"),true);return;}
+  cloudStatus(t("clConnecting"),false);
   try{
     const appMod=await import("https://www.gstatic.com/firebasejs/"+FB_VER+"/firebase-app.js");
     const fsMod=await import("https://www.gstatic.com/firebasejs/"+FB_VER+"/firebase-firestore.js");
@@ -919,12 +1205,12 @@ async function connectCloud(){
     const ref=fsMod.doc(db,"boards",code);
     cloud.unsub=fsMod.onSnapshot(ref,(snap)=>{
       if(snap.metadata&&snap.metadata.hasPendingWrites)return;
-      if(!snap.exists()){pushCloud();cloudStatus("Bağlı · yeni pano",false);return;}
+      if(!snap.exists()){pushCloud();cloudStatus(t("clNewBoard"),false);return;}
       const d=snap.data();if(d&&d.stateJson)applyRemote(d.stateJson);
-      cloudStatus("Senkron",false);
-    },(err)=>{cloudStatus("Hata: "+((err&&err.code)||"bağlantı"),true);});
-    cloudStatus("Bağlı",false);
-  }catch(e){cloud.on=false;cloudStatus("Firebase yüklenemedi (internet?)",true);}
+      cloudStatus(t("clSync"),false);
+    },(err)=>{cloudStatus(t("clErr")+" "+((err&&err.code)||t("clConnErr")),true);});
+    cloudStatus(t("clConnected"),false);
+  }catch(e){cloud.on=false;cloudStatus(t("clLoadFail"),true);}
 }
 function applyRemote(stateJson){
   let inc;try{inc=migrate(JSON.parse(stateJson));}catch(e){return;}
@@ -937,7 +1223,7 @@ function applyRemote(stateJson){
 async function pushCloud(){
   if(!cloud.on||!cloud.db||!cloud.fs)return;
   try{const ref=cloud.fs.doc(cloud.db,"boards",cloud.code);await cloud.fs.setDoc(ref,{stateJson:JSON.stringify(state),savedAt:Date.now()});}
-  catch(e){cloudStatus("Yazma hatası",true);}
+  catch(e){cloudStatus(t("clWriteErr"),true);}
 }
 function extractConfigObject(text){
   const s=text||"";
@@ -957,7 +1243,7 @@ function parseConfig(text){
 }
 function cloudSetup(configText,codeText){
   const config=parseConfig(configText);
-  if(!config||!config.projectId||!config.apiKey){flash("Config okunamadı — apiKey/projectId içeren bloğu yapıştır",true);return;}
+  if(!config||!config.projectId||!config.apiKey){flash(t("clCfgUnread"),true);return;}
   const code=(codeText&&codeText.trim())?codeText.trim().replace(/\s/g,""):genCode();
   localStorage.setItem("cloudConfig",JSON.stringify(config));
   localStorage.setItem("boardCode",code);
@@ -967,21 +1253,21 @@ function cloudJoin(str){
   try{const o=JSON.parse(decodeURIComponent(escape(atob(str.trim()))));if(!o.c||!o.k)throw 0;
     localStorage.setItem("cloudConfig",JSON.stringify(o.c));localStorage.setItem("boardCode",o.k);
     closeModal();connectCloud();
-  }catch(e){flash("Geçersiz davet kodu",true);}
+  }catch(e){flash(t("clBadInvite"),true);}
 }
 function cloudShare(){
   const cfg=localStorage.getItem("cloudConfig"),code=localStorage.getItem("boardCode");
-  if(!cfg||!code){flash("Önce bağlan",true);return;}
+  if(!cfg||!code){flash(t("clConnectFirst"),true);return;}
   const str=btoa(unescape(encodeURIComponent(JSON.stringify({c:JSON.parse(cfg),k:code}))));
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(str).then(()=>flash("Davet kodu kopyalandı")).catch(()=>flash("Kopyalanamadı",true));
-  else flash("Kopyalanamadı",true);
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(str).then(()=>flash(t("clCopied"))).catch(()=>flash(t("clCopyFail"),true));
+  else flash(t("clCopyFail"),true);
 }
 function cloudDisconnect(){
-  if(!confirm("Bulut bağlantısı kesilsin? Veriler cihazda kalır."))return;
+  if(!confirm(t("clDisconnectConfirm")))return;
   try{if(cloud.unsub)cloud.unsub();}catch(e){}
   cloud={on:false,db:null,fs:null,code:null,unsub:null,statusMsg:"",statusErr:false};
   localStorage.removeItem("cloudConfig");localStorage.removeItem("boardCode");
-  renderCloud();flash("Bağlantı kesildi");
+  renderCloud();flash(t("clDisconnected"));
 }
 function renderCloud(){
   const card=document.getElementById("cloudCard");if(!card)return;card.innerHTML="";
@@ -989,49 +1275,55 @@ function renderCloud(){
   const st=document.createElement("div");st.className="temposum";st.style.marginBottom="10px";
   if(connected){
     const code=localStorage.getItem("boardCode")||"";
-    const msg=cloud.statusMsg||(cloud.on?"Bağlı":"Bağlanıyor…");
-    st.innerHTML="Durum: <b style=\"color:"+(cloud.statusErr?"var(--red)":"var(--green)")+"\">"+msg+"</b> · kod …"+code.slice(-6);
-  }else st.innerHTML="Durum: <b>Yerel</b> (bulut kapalı)";
+    const msg=cloud.statusMsg||(cloud.on?t("clConnected"):t("clConnecting"));
+    st.innerHTML=t("clStatus")+" <b style=\"color:"+(cloud.statusErr?"var(--red)":"var(--green)")+"\">"+msg+"</b> · "+t("clCode")+" …"+code.slice(-6);
+  }else st.innerHTML=t("clStatus")+" <b>"+t("clLocal")+"</b> "+t("clLocalTail");
   card.appendChild(st);
   const btns=document.createElement("div");btns.className="bkbtns";
   if(connected){
-    const share=document.createElement("button");share.className="bk amber";share.textContent="Davet kodunu paylaş";share.onclick=cloudShare;
-    const dis=document.createElement("button");dis.className="bk";dis.textContent="Bağlantıyı kes";dis.onclick=cloudDisconnect;
+    const share=document.createElement("button");share.className="bk amber";share.textContent=t("clShare");share.onclick=cloudShare;
+    const dis=document.createElement("button");dis.className="bk";dis.textContent=t("clDisconnect");dis.onclick=cloudDisconnect;
     btns.appendChild(share);btns.appendChild(dis);
   }else{
-    const conn=document.createElement("button");conn.className="bk amber";conn.textContent="Buluta bağlan / katıl";conn.onclick=openCloudModal;
+    const conn=document.createElement("button");conn.className="bk amber";conn.textContent=t("clConnect");conn.onclick=openCloudModal;
     btns.appendChild(conn);
   }
   card.appendChild(btns);
   const note=document.createElement("div");note.className="note";
-  note.textContent=connected?"Kodu bilen herkes düzenleyebilir (paylaşılan şifre gibi). Sadece ekip arkadaşına ver.":"Ortak yönetim için tek seferlik Firebase (Google) kurulumu gerekir. Bağlan'a basınca adımlar açılır.";
+  note.textContent=connected?t("clNoteOn"):t("clNoteOff");
   card.appendChild(note);
 }
 function openCloudModal(){
   const wrap=document.createElement("div");
   const steps=document.createElement("div");steps.className="note";steps.style.cssText="margin-bottom:14px;line-height:1.5";
-  steps.innerHTML="Tek seferlik kurulum: <b>console.firebase.google.com</b> → proje oluştur → Web app ekle (&lt;/&gt; ikonu) → çıkan <b>firebaseConfig</b> nesnesini kopyala → Build &gt; Firestore Database &gt; veritabanı oluştur (kuralları ayrıca verdim).";
+  steps.innerHTML=t("clSteps");
   wrap.appendChild(steps);
-  const l1=document.createElement("label");l1.textContent="firebaseConfig (sahip)";l1.className="cloudlbl";
-  const cfg=document.createElement("textarea");cfg.className="vnote";cfg.placeholder='Firebase\'in verdiği "const firebaseConfig = { ... }" bloğunu olduğu gibi yapıştır';cfg.style.minHeight="92px";
-  const codeIn=document.createElement("input");codeIn.className="vinput";codeIn.placeholder="Pano kodu (boş = otomatik üret)";codeIn.style.marginTop="10px";
-  const connBtn=document.createElement("button");connBtn.className="applybtn";connBtn.style.marginTop="6px";connBtn.textContent="Bağlan & kod üret";connBtn.onclick=()=>cloudSetup(cfg.value,codeIn.value);
+  const l1=document.createElement("label");l1.textContent=t("clCfgLabel");l1.className="cloudlbl";
+  const cfg=document.createElement("textarea");cfg.className="vnote";cfg.placeholder=t("clCfgPlaceholder");cfg.style.minHeight="92px";
+  const codeIn=document.createElement("input");codeIn.className="vinput";codeIn.placeholder=t("clCodePlaceholder");codeIn.style.marginTop="10px";
+  const connBtn=document.createElement("button");connBtn.className="applybtn";connBtn.style.marginTop="6px";connBtn.textContent=t("clConnGen");connBtn.onclick=()=>cloudSetup(cfg.value,codeIn.value);
   wrap.appendChild(l1);wrap.appendChild(cfg);wrap.appendChild(codeIn);wrap.appendChild(connBtn);
-  const dv=document.createElement("div");dv.style.cssText="text-align:center;color:var(--faint);font-family:var(--mono);font-size:11px;margin:16px 0";dv.textContent="— veya —";wrap.appendChild(dv);
-  const l2=document.createElement("label");l2.textContent="Davet koduyla katıl (ekip arkadaşı)";l2.className="cloudlbl";
-  const joinIn=document.createElement("textarea");joinIn.className="vnote";joinIn.placeholder="Sana gelen davet kodunu yapıştır";joinIn.style.minHeight="70px";
-  const joinBtn=document.createElement("button");joinBtn.className="bk amber";joinBtn.style.cssText="width:100%;margin-top:6px;min-height:46px";joinBtn.textContent="Katıl";joinBtn.onclick=()=>cloudJoin(joinIn.value);
+  const dv=document.createElement("div");dv.style.cssText="text-align:center;color:var(--faint);font-family:var(--mono);font-size:11px;margin:16px 0";dv.textContent=t("clOr");wrap.appendChild(dv);
+  const l2=document.createElement("label");l2.textContent=t("clJoinLabel");l2.className="cloudlbl";
+  const joinIn=document.createElement("textarea");joinIn.className="vnote";joinIn.placeholder=t("clJoinPlaceholder");joinIn.style.minHeight="70px";
+  const joinBtn=document.createElement("button");joinBtn.className="bk amber";joinBtn.style.cssText="width:100%;margin-top:6px;min-height:46px";joinBtn.textContent=t("clJoin");joinBtn.onclick=()=>cloudJoin(joinIn.value);
   wrap.appendChild(l2);wrap.appendChild(joinIn);wrap.appendChild(joinBtn);
-  openModalNode("Bulut bağlantısı",wrap);
+  openModalNode(t("clModalTitle"),wrap);
 }
 
 document.getElementById("vtabOverview").onclick=()=>setView("overview");
 document.getElementById("vtabChannels").onclick=()=>setView("channels");
+document.getElementById("vtabCalendar").onclick=()=>setView("calendar");
+document.getElementById("vtabIdeas").onclick=()=>setView("ideas");
 document.getElementById("saveBtn").onclick=()=>save(false);
 document.getElementById("modalClose").onclick=closeModal;
 document.getElementById("modal").onclick=(e)=>{if(e.target.id==="modal")closeModal();};
 (function(){const sb=document.getElementById("searchBtn");sb.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>';sb.onclick=openSearchModal;})();
 
+document.getElementById("langTR").onclick=()=>setLang("tr");
+document.getElementById("langEN").onclick=()=>setLang("en");
+updateLangBtn();
+applyI18n();
 renderAll();
 if(localStorage.getItem("cloudConfig")&&localStorage.getItem("boardCode"))connectCloud();
 document.addEventListener("focusout",()=>{if(pendingRemote){setTimeout(()=>{const ae=document.activeElement;if(!ae||(ae.tagName!=="INPUT"&&ae.tagName!=="TEXTAREA")){const p=pendingRemote;pendingRemote=null;applyRemote(p);}},50);}});
