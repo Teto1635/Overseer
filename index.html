@@ -406,7 +406,8 @@ const I18N={
   bkTitle:"Toplu tarih ata", fPattern:"Kalıp", patOdd:"Tek 1,3,5…", patEven:"Çift 2,4,6…", patAll:"Tümü",
   fChannel:"Kanal", fDays:"Yayın günleri", fRange:"Tarih aralığı", fStart:"Başlangıç", fEnd:"Bitiş",
   prevPick:"Kalıp, gün ve tarih aralığı seç.", prevTargets:"hedef ·", prevDays:"uygun gün →", prevAssigned:"videoya atanır", prevLeftover:"video boş kalır",
-  bulkApply:"Uygula", bulkNothing:"Atanacak bir şey yok", bulkDone:"videoya tarih atandı", bulkConfirm:"videoya tarih atanacak (yayınlanmışlara dokunulmaz). Devam?",
+  bulkApply:"Uygula", bulkNothing:"Atanacak boş video yok", bulkDone:"videoya tarih atandı", bulkConfirm:"videoya tarih atanacak (yayınlanmışlara dokunulmaz). Devam?",
+  fProtect:"Dolu tarihler", protectKeep:"Koru (atla)", protectOver:"Üzerine yaz",
   calToday:"Bugüne dön", colorTitle:"Kanal rengi",
   searchTitle:"Ara", searchPlaceholder:"Video ara…", searchHint:"Başlık yaz, tüm kanallarda arar.", searchNone:"Eşleşme yok.", sLive:"yayında", sPlanned:"yayınlanacak", sUndated:"tarihsiz",
   ideaPool:"Notlar", ideaAdd:"+ Not ekle", ideaEmpty:"Henüz not yok. Üstten ekle.", ideaTitlePlaceholder:"Başlık", ideaNotePlaceholder:"Not / outlier linki / açı…",
@@ -460,7 +461,8 @@ const I18N={
   bkTitle:"Bulk assign dates", fPattern:"Pattern", patOdd:"Odd 1,3,5…", patEven:"Even 2,4,6…", patAll:"All",
   fChannel:"Channel", fDays:"Publish days", fRange:"Date range", fStart:"Start", fEnd:"End",
   prevPick:"Pick pattern, days and date range.", prevTargets:"targets ·", prevDays:"valid days →", prevAssigned:"will be dated", prevLeftover:"left empty",
-  bulkApply:"Apply", bulkNothing:"Nothing to assign", bulkDone:"videos dated", bulkConfirm:"videos will be dated (published untouched). Continue?",
+  bulkApply:"Apply", bulkNothing:"No empty videos to assign", bulkDone:"videos dated", bulkConfirm:"videos will be dated (published untouched). Continue?",
+  fProtect:"Filled dates", protectKeep:"Keep (skip)", protectOver:"Overwrite",
   calToday:"Back to today", colorTitle:"Channel color",
   searchTitle:"Search", searchPlaceholder:"Search videos…", searchHint:"Type a title, searches all channels.", searchNone:"No matches.", sLive:"published", sPlanned:"to publish", sUndated:"undated",
   ideaPool:"Notes", ideaAdd:"+ Add note", ideaEmpty:"No notes yet. Add one above.", ideaTitlePlaceholder:"Title", ideaNotePlaceholder:"Note / outlier link / angle…",
@@ -749,10 +751,11 @@ function closeModal(){document.getElementById("modal").classList.remove("open");
 function autoDateCompute(cfg){
   const ch=state.channels[cfg.ci];
   const planned=ch.videos.map((v,i)=>({v,i})).filter(o=>o.v.status!=="published");
-  let targets;
-  if(cfg.pattern==="odd") targets=planned.filter((o,k)=>k%2===0);
-  else if(cfg.pattern==="even") targets=planned.filter((o,k)=>k%2===1);
-  else targets=planned;
+  let pool;
+  if(cfg.pattern==="odd") pool=planned.filter((o,k)=>k%2===0);
+  else if(cfg.pattern==="even") pool=planned.filter((o,k)=>k%2===1);
+  else pool=planned;
+  const targets=(cfg.skipDated===false)?pool:pool.filter(o=>!o.v.date);
   const occ=[];
   if(cfg.start&&cfg.end&&cfg.days.size){
     const[sy,sm,sd]=cfg.start.split("-").map(Number);
@@ -774,7 +777,7 @@ function autoDateApply(cfg){
 }
 function fieldWrap(label){const f=document.createElement("div");f.className="fld";const l=document.createElement("label");l.textContent=label;f.appendChild(l);return f;}
 function openAutoDateModal(defaultCi){
-  const cfg={pattern:"all",ci:defaultCi,days:new Set(),start:"",end:""};
+  const cfg={pattern:"all",ci:defaultCi,days:new Set(),start:"",end:"",skipDated:true};
   const wrap=document.createElement("div");
 
   const f1=fieldWrap(t("fPattern"));const seg=document.createElement("div");seg.className="seg";
@@ -804,6 +807,14 @@ function openAutoDateModal(defaultCi){
   const sd=document.createElement("div");sd.appendChild(mini(t("fStart")));sd.appendChild(sIn);
   const ed=document.createElement("div");ed.appendChild(mini(t("fEnd")));ed.appendChild(eIn);
   r2.appendChild(sd);r2.appendChild(ed);f4.appendChild(r2);wrap.appendChild(f4);
+
+  const f5=fieldWrap(t("fProtect"));const seg2=document.createElement("div");seg2.className="seg";
+  [["keep",t("protectKeep")],["over",t("protectOver")]].forEach(([k,tx])=>{
+    const b=document.createElement("button");b.textContent=tx;b.className=((k==="keep")===(cfg.skipDated!==false))?"on":"";
+    b.onclick=()=>{cfg.skipDated=(k==="keep");[...seg2.children].forEach(c=>c.className="");b.className="on";upd();};
+    seg2.appendChild(b);
+  });
+  f5.appendChild(seg2);wrap.appendChild(f5);
 
   const prev=document.createElement("div");prev.className="prev";wrap.appendChild(prev);
   const apply=document.createElement("button");apply.className="applybtn";apply.textContent=t("bulkApply");apply.onclick=()=>autoDateApply(cfg);
