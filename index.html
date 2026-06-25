@@ -240,6 +240,16 @@
   .tagchip{min-height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:12px;font-weight:700}
   .tagchip.on{border-color:var(--amber);background:rgba(240,180,41,.14);color:var(--amber)}
   .itagrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+  .idatechip{font-size:11px;font-weight:800;color:var(--amber);background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.4);border-radius:999px;padding:2px 9px}
+  .isortrow{display:flex;align-items:center;gap:8px;margin-top:8px}
+  .isortlbl{font-size:11px;color:var(--faint);font-family:var(--mono)}
+  .isortseg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .isortseg button{min-height:30px;padding:0 12px;background:var(--panel2);color:var(--muted);font-size:12px;font-weight:700;border:none;border-left:1px solid var(--line)}
+  .isortseg button:first-child{border-left:none}
+  .isortseg button.on{background:rgba(240,180,41,.14);color:var(--amber)}
+  .idaterow{display:flex;gap:8px;margin-bottom:10px}
+  .idateinput{flex:1;min-height:40px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:0 10px;font-size:14px;font-family:inherit}
+  .idaterow .vbtn{flex:0 0 auto}
   .tagmini{font-size:11px;font-weight:700;color:var(--blue);background:rgba(94,160,255,.12);border:1px solid rgba(94,160,255,.35);border-radius:999px;padding:2px 9px}
   .ited{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
   .tagedit{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 4px 3px 11px}
@@ -415,6 +425,7 @@ const I18N={
   ideaLinkLabel:"Link", ideaLinkPlaceholder:"https://… (outlier, kaynak, referans)", ideaImgLabel:"Görsel", ideaImgAdd:"Görsel ekle", ideaImgChange:"Görseli değiştir", ideaImgRemove:"Kaldır",
   ideaSearchPlaceholder:"Notlarda ara…", ideaTagsLabel:"Etiketler", ideaTagAdd:"Etiket ekle, Enter…", ideaCopyNote:"Notu kopyala",
   favTitle:"Sadece favoriler", ideaDeleted:"Not silindi", undo:"Geri al",
+  noteDateLabel:"Tarih", dateClear:"Temizle", sortLabel:"Sırala", sortManual:"Elle", sortDate:"Tarihe göre",
   imgErr:"Görsel okunamadı", imgRemoveConfirm:"Görsel kaldırılsın?", clTooBig:"Veri çok büyük (görseller) — buluta yazılamadı",
   dragLabel:"sürükle"
  },
@@ -470,6 +481,7 @@ const I18N={
   ideaLinkLabel:"Link", ideaLinkPlaceholder:"https://… (outlier, source, reference)", ideaImgLabel:"Image", ideaImgAdd:"Add image", ideaImgChange:"Change image", ideaImgRemove:"Remove",
   ideaSearchPlaceholder:"Search notes…", ideaTagsLabel:"Tags", ideaTagAdd:"Add tag, Enter…", ideaCopyNote:"Copy note",
   favTitle:"Favorites only", ideaDeleted:"Note deleted", undo:"Undo",
+  noteDateLabel:"Date", dateClear:"Clear", sortLabel:"Sort", sortManual:"Manual", sortDate:"By date",
   imgErr:"Couldn't read image", imgRemoveConfirm:"Remove image?", clTooBig:"Data too big (images) — cloud not updated",
   dragLabel:"drag"
  }
@@ -502,7 +514,7 @@ function migrate(s){
   }));
   if(s.channels.length===0) s.channels=defaultState().channels;
   s.settings=Object.assign({hoursPerVideo:6,hoursPerDay:6}, s.settings||{});
-  s.ideas=Array.isArray(s.ideas)?s.ideas.map(x=>({id:x.id||uid(),title:x.title||"",note:x.note||"",link:x.link||"",imgs:Array.isArray(x.imgs)?x.imgs.filter(Boolean):(x.img?[x.img]:[]),tags:Array.isArray(x.tags)?x.tags.filter(Boolean):[],ci:(x.ci===0||x.ci)?x.ci:"",star:!!x.star,createdAt:x.createdAt||Date.now()})):[];
+  s.ideas=Array.isArray(s.ideas)?s.ideas.map(x=>({id:x.id||uid(),title:x.title||"",note:x.note||"",link:x.link||"",date:x.date||"",imgs:Array.isArray(x.imgs)?x.imgs.filter(Boolean):(x.img?[x.img]:[]),tags:Array.isArray(x.tags)?x.tags.filter(Boolean):[],ci:(x.ci===0||x.ci)?x.ci:"",star:!!x.star,createdAt:x.createdAt||Date.now()})):[];
   return s;
 }
 
@@ -1140,7 +1152,7 @@ function renderSavedAt(){document.getElementById("savedAt").textContent=savedAt?
 function renderAll(){refreshOverview();renderCloud();renderBackup();renderTabs();renderPanel();renderCalendarView();renderIdeas();renderSavedAt();}
 
 // ---- Pano (notes board) ----
-let panoFilter={q:"",tags:new Set(),fav:false};
+let panoFilter={q:"",tags:new Set(),fav:false,sort:"manual"};
 let idrag=null;
 let undoTimer=null;
 function panoTagsAll(){const s=new Set();(state.ideas||[]).forEach(i=>(i.tags||[]).forEach(x=>s.add(x)));return [...s].sort((a,b)=>a.localeCompare(b));}
@@ -1158,7 +1170,7 @@ function renderIdeas(){
   const head=document.createElement("div");head.className="pad";head.innerHTML='<div class="label">'+t("ideaPool")+'</div>';root.appendChild(head);
   const addWrap=document.createElement("div");addWrap.style.padding="0 16px";
   const add=document.createElement("button");add.className="addbtn";add.style.marginTop="0";add.textContent=t("ideaAdd");
-  add.onclick=()=>{const nid=uid();state.ideas.unshift({id:nid,title:"",note:"",link:"",imgs:[],tags:[],star:false,createdAt:Date.now()});expandedIds.add(nid);renderIdeas();autosave();};
+  add.onclick=()=>{const nid=uid();state.ideas.unshift({id:nid,title:"",note:"",link:"",date:"",imgs:[],tags:[],star:false,createdAt:Date.now()});expandedIds.add(nid);renderIdeas();autosave();};
   addWrap.appendChild(add);root.appendChild(addWrap);
 
   // filter bar
@@ -1173,6 +1185,11 @@ function renderIdeas(){
     swrap.appendChild(sin);
     if(panoFilter.q){const clr=document.createElement("button");clr.className="iclear";clr.textContent="✕";clr.onclick=()=>{panoFilter.q="";renderIdeas();};swrap.appendChild(clr);}
     fb.appendChild(swrap);
+    const sortRow=document.createElement("div");sortRow.className="isortrow";
+    const sl=document.createElement("span");sl.className="isortlbl";sl.textContent=t("sortLabel");sortRow.appendChild(sl);
+    const sseg=document.createElement("div");sseg.className="isortseg";
+    [["manual",t("sortManual")],["date",t("sortDate")]].forEach(([k,tx])=>{const b=document.createElement("button");b.textContent=tx;b.className=((panoFilter.sort||"manual")===k)?"on":"";b.onclick=()=>{panoFilter.sort=k;renderIdeas();};sseg.appendChild(b);});
+    sortRow.appendChild(sseg);fb.appendChild(sortRow);
     const allTags=panoTagsAll();
     if(allTags.length){
       const tr2=document.createElement("div");tr2.className="itagfilter";
@@ -1190,9 +1207,18 @@ function renderIdeas(){
 function renderIdeasList(){
   const list=document.getElementById("ideaList");if(!list)return;list.innerHTML="";
   if(state.ideas.length===0){const e=document.createElement("div");e.className="empty";e.textContent=t("ideaEmpty");list.appendChild(e);return;}
-  const shown=state.ideas.filter(panoMatch);
+  let shown=state.ideas.filter(panoMatch);
+  if((panoFilter.sort||"manual")==="date"){
+    shown=shown.slice().sort((a,b)=>{
+      const ad=a.date||"",bd=b.date||"";
+      if(ad&&bd)return ad<bd?-1:(ad>bd?1:0);
+      if(ad&&!bd)return -1;
+      if(!ad&&bd)return 1;
+      return (b.createdAt||0)-(a.createdAt||0);
+    });
+  }
   if(shown.length===0){const e=document.createElement("div");e.className="empty";e.textContent=t("searchNone");list.appendChild(e);return;}
-  const canDrag=!panoFilter.q&&panoFilter.tags.size===0&&!panoFilter.fav&&shown.length>1;
+  const canDrag=(panoFilter.sort||"manual")==="manual"&&!panoFilter.q&&panoFilter.tags.size===0&&!panoFilter.fav&&shown.length>1;
   shown.forEach(idea=>list.appendChild(ideaCard(idea,canDrag)));
 }
 function ideaCard(idea,canDrag){
@@ -1220,7 +1246,7 @@ function ideaCard(idea,canDrag){
 
   // tag chips (mini, always visible)
   const tagrow=document.createElement("div");tagrow.className="itagrow";card.appendChild(tagrow);
-  const renderTags=()=>{tagrow.innerHTML="";(idea.tags||[]).forEach(tg=>{const c=document.createElement("span");c.className="tagmini";c.textContent=tg;tagrow.appendChild(c);});tagrow.style.display=(idea.tags&&idea.tags.length)?"flex":"none";};
+  const renderTags=()=>{tagrow.innerHTML="";if(idea.date){const dc=document.createElement("span");dc.className="idatechip";dc.textContent=fmtDate(idea.date);tagrow.appendChild(dc);}(idea.tags||[]).forEach(tg=>{const c=document.createElement("span");c.className="tagmini";c.textContent=tg;tagrow.appendChild(c);});tagrow.style.display=(idea.date||(idea.tags&&idea.tags.length))?"flex":"none";};
 
   // badges
   const badges=document.createElement("div");badges.className="ibadges";
@@ -1247,6 +1273,13 @@ function ideaCard(idea,canDrag){
   const copyBtn=document.createElement("button");copyBtn.className="linkbtn";copyBtn.textContent=t("ideaCopyNote");
   copyBtn.onclick=()=>{const txt=idea.note||"";if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>flash(t("bkCopied"))).catch(()=>flash(t("clCopyFail"),true));else flash(t("clCopyFail"),true);};
   copyRow.appendChild(copyBtn);
+  const dl=document.createElement("label");dl.textContent=t("noteDateLabel");
+  const drow=document.createElement("div");drow.className="idaterow";
+  const dIn=document.createElement("input");dIn.type="date";dIn.className="idateinput";dIn.value=idea.date||"";
+  dIn.onchange=()=>{idea.date=dIn.value;autosave();renderIdeasList();};
+  drow.appendChild(dIn);
+  const dx=document.createElement("button");dx.className="vbtn";dx.textContent=t("dateClear");dx.onclick=()=>{idea.date="";autosave();renderIdeasList();};
+  drow.appendChild(dx);
   const ll=document.createElement("label");ll.textContent=t("ideaLinkLabel");
   const linkIn=document.createElement("input");linkIn.className="vinput";linkIn.value=idea.link||"";linkIn.placeholder=t("ideaLinkPlaceholder");
   linkIn.oninput=()=>{idea.link=linkIn.value;updBadges();autosave();};
@@ -1265,6 +1298,7 @@ function ideaCard(idea,canDrag){
   const addImg=document.createElement("button");addImg.className="vbtn b";addImg.textContent=t("ideaImgAdd");addImg.onclick=()=>pickImage(idea);
 
   detail.appendChild(nl);detail.appendChild(note);detail.appendChild(copyRow);
+  detail.appendChild(dl);detail.appendChild(drow);
   detail.appendChild(ll);detail.appendChild(linkIn);
   detail.appendChild(tl);detail.appendChild(ted);
   detail.appendChild(il);detail.appendChild(thumbs);detail.appendChild(addImg);
@@ -1600,7 +1634,7 @@ function handleShareTarget(){
     const link=url||(/^https?:\/\//i.test(text.trim())?text.trim():"");
     const note=(link&&link===text.trim())?"":text;
     const nid=uid();
-    state.ideas.unshift({id:nid,title:ttl||"",note:note||"",link:link||"",imgs:[],tags:[],star:false,createdAt:Date.now()});
+    state.ideas.unshift({id:nid,title:ttl||"",note:note||"",link:link||"",date:"",imgs:[],tags:[],star:false,createdAt:Date.now()});
     expandedIds.add(nid);save(true);renderIdeas();setView("ideas");
     history.replaceState({},"",location.pathname);
   }catch(e){}
