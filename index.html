@@ -372,7 +372,8 @@
 const KEY = "yayin-panosu-v1";
 const uid = () => Math.random().toString(36).slice(2,9);
 const PALETTE=["#F0B429","#5EA0FF","#34D399","#A78BFA","#F472B6","#FB923C","#22D3EE","#F87171"];
-const CHECK_STEPS=[["ses","Seslendirme"],["srt","SRT"],["edit","Edit"],["pin","Sabit yorum"]];
+const CHECK_STEPS=[["script","Script"],["scenes","Sahneler"],["ses","Seslendirme"],["thumbs","Thumbnail"],["title","Başlık"],["cover","Kapak"],["uhelper","U.Helper"]];
+const defaultChecks=()=>CHECK_STEPS.reduce((o,s)=>(o[s[0]]=false,o),{});
 const MONTHS_TR=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 const MONTHS_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const MONTHS={tr:MONTHS_TR,en:MONTHS_EN};
@@ -414,7 +415,7 @@ const I18N={
   chNamePlaceholder:"Kanal adı", chMetaVideo:"video", chMetaPlanned:"yayınlanacak", chMetaLive:"yayında",
   secPublished:"Yayınlanan", secPlanned:"Yayınlanacak", plannedEmpty:"Yayınlanacak video yok.", bulkBtn:"⚡ Toplu tarih ata", addVideo:"+ Video ekle",
   vTitlePlaceholder:"Video adı", bgLink:"link", bgNote:"not", stbLive:"Yayında", stbPlanned:"Yayınlanacak", vOverdue:"gecikmiş ·",
-  ck_ses:"Seslendirme", ck_srt:"SRT", ck_edit:"Edit", ck_pin:"Sabit yorum", prep:"Hazırlık",
+  ck_script:"Script", ck_scenes:"Sahneler", ck_ses:"Seslendirme", ck_thumbs:"Thumbnail", ck_title:"Başlık", ck_cover:"Kapak", ck_uhelper:"U.Helper", ck_ready:"Hazır", prep:"Hazırlık",
   ytLabel:"YouTube linki · Studio'da açılır", ytPlaceholder:"youtube.com/watch?v=… ya da video ID", openStudio:"Studio'da aç", addToCal:"Takvime ekle · 19:00",
   noteLabel:"Not", vNotePlaceholder:"Bu video hakkında not…", noteEmpty:"(boş)", noteModalTitle:"Not",
   icsNoLink:"Yayın günü", icsSummary:"Yayın:", icsAlarm:"Yayın",
@@ -471,7 +472,7 @@ const I18N={
   chNamePlaceholder:"Channel name", chMetaVideo:"videos", chMetaPlanned:"to publish", chMetaLive:"published",
   secPublished:"Published", secPlanned:"To publish", plannedEmpty:"No videos to publish.", bulkBtn:"⚡ Bulk assign dates", addVideo:"+ Add video",
   vTitlePlaceholder:"Video title", bgLink:"link", bgNote:"note", stbLive:"Published", stbPlanned:"To publish", vOverdue:"overdue ·",
-  ck_ses:"Voiceover", ck_srt:"SRT", ck_edit:"Edit", ck_pin:"Pinned comment", prep:"Prep",
+  ck_script:"Script", ck_scenes:"Scenes", ck_ses:"Voiceover", ck_thumbs:"Thumbnails", ck_title:"Title", ck_cover:"Cover", ck_uhelper:"U.Helper", ck_ready:"Ready", prep:"Prep",
   ytLabel:"YouTube link · opens in Studio", ytPlaceholder:"youtube.com/watch?v=… or video ID", openStudio:"Open in Studio", addToCal:"Add to calendar · 19:00",
   noteLabel:"Note", vNotePlaceholder:"Note about this video…", noteEmpty:"(empty)", noteModalTitle:"Note",
   icsNoLink:"Publish day", icsSummary:"Publish:", icsAlarm:"Publish",
@@ -518,7 +519,7 @@ function migrate(s){
   s=s||{};
   s.channels=(s.channels||[]).map((c,idx)=>({
     id:c.id||uid(), name:c.name||"Kanal", color:c.color||PALETTE[idx%PALETTE.length],
-    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||"",link:v.link||"",note:v.note||"",publishedAt:v.publishedAt||"",checks:Object.assign({ses:false,srt:false,edit:false,pin:false},(v.checks&&typeof v.checks==="object")?v.checks:{})}))
+    videos:(c.videos||[]).map(v=>({id:v.id||uid(),title:v.title||"Video",status:v.status==="published"?"published":"planned",date:v.date||"",link:v.link||"",note:v.note||"",publishedAt:v.publishedAt||"",checks:CHECK_STEPS.reduce((o,s)=>(o[s[0]]=!!(v.checks&&v.checks[s[0]]),o),{})}))
   }));
   if(s.channels.length===0) s.channels=defaultState().channels;
   s.settings=Object.assign({hoursPerVideo:6,hoursPerDay:6}, s.settings||{});
@@ -911,7 +912,7 @@ function renderPanel(){
     plannedArr.forEach((o,k)=>wrap.appendChild(videoRow(ch,o.v,o.i,{group:"planned",pos:k,planned:plannedArr})));
     panel.appendChild(wrap);
     const add=document.createElement("button");add.className="addbtn";add.textContent=t("addVideo");
-    add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:"",link:"",note:"",publishedAt:"",checks:{ses:false,srt:false,edit:false,pin:false}});collapsed.planned=false;renderPanel();renderTabs();refreshOverview();autosave();};
+    add.onclick=()=>{ch.videos.push({id:uid(),title:`Video ${ch.videos.length+1}`,status:"planned",date:"",link:"",note:"",publishedAt:"",checks:defaultChecks()});collapsed.planned=false;renderPanel();renderTabs();refreshOverview();autosave();};
     panel.appendChild(add);
   }
 }
@@ -933,7 +934,7 @@ function videoRow(ch,v,arrIdx,opts){
   const updBadges=()=>{linkBadge.style.display=(v.link&&v.link.trim())?"inline-flex":"none";noteBadge.style.display=(v.note&&v.note.trim())?"inline-flex":"none";};
   let chkBadge=null;
   if(grp==="planned"){chkBadge=document.createElement("span");chkBadge.className="badge chk";}
-  function updChk(){if(!chkBadge)return;const done=CHECK_STEPS.reduce((n,s)=>n+((v.checks&&v.checks[s[0]])?1:0),0);chkBadge.textContent=done+"/4";const full=done===4;chkBadge.style.color=full?cssVar("--green"):cssVar("--faint");chkBadge.style.borderColor=full?"rgba(52,211,153,.45)":cssVar("--line");}
+  function updChk(){if(!chkBadge)return;const total=CHECK_STEPS.length;const done=CHECK_STEPS.reduce((n,s)=>n+((v.checks&&v.checks[s[0]])?1:0),0);const full=done===total;chkBadge.textContent=full?("✓ "+t("ck_ready")):(done+"/"+total);chkBadge.style.color=full?cssVar("--green"):cssVar("--faint");chkBadge.style.borderColor=full?"rgba(52,211,153,.45)":cssVar("--line");}
   const chev=document.createElement("button");chev.className="chev";chev.textContent=isOpen?"⌃":"⌄";
   rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);rtop.appendChild(linkBadge);rtop.appendChild(noteBadge);if(chkBadge)rtop.appendChild(chkBadge);rtop.appendChild(chev);
   row.appendChild(rtop);
@@ -963,7 +964,7 @@ function videoRow(ch,v,arrIdx,opts){
   const overEl=document.createElement("div");overEl.className="overtxt";overEl.style.display="none";row.appendChild(overEl);
 
   const detail=document.createElement("div");detail.className="vdetail"+(isOpen?" open":"");
-  if(!v.checks)v.checks={ses:false,srt:false,edit:false,pin:false};
+  if(!v.checks)v.checks=defaultChecks();
   const hl=document.createElement("label");hl.textContent=t("prep");
   const chkRow=document.createElement("div");chkRow.className="chkrow";
   CHECK_STEPS.forEach(s=>{const c=document.createElement("button");c.className="chk"+(v.checks[s[0]]?" on":"");c.textContent=t("ck_"+s[0]);c.onclick=()=>{v.checks[s[0]]=!v.checks[s[0]];c.classList.toggle("on",v.checks[s[0]]);updChk();autosave();};chkRow.appendChild(c);});

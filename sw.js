@@ -1,4 +1,4 @@
-const CACHE = "yayin-panosu-v4";
+const CACHE = "yayin-panosu-v5";
 const ASSETS = [
   "./",
   "./index.html",
