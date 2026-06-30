@@ -187,6 +187,9 @@
   .srest{font-family:var(--mono);font-size:11px;flex:0 0 auto}
   .cloudlbl{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
   .badge.chk{font-family:var(--mono)}
+  .badge.chk.bar{gap:3px;padding:0 7px}
+  .badge.chk.bar .seg{width:5px;height:11px;border-radius:2px;background:rgba(255,255,255,.12);transition:background .14s ease}
+  .badge.chk.bar .seg.on{background:var(--green)}
   .chkrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
   .chk{min-height:38px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:13px;font-weight:700}
   .chk.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:var(--green)}
@@ -934,7 +937,7 @@ function videoRow(ch,v,arrIdx,opts){
   const updBadges=()=>{linkBadge.style.display=(v.link&&v.link.trim())?"inline-flex":"none";noteBadge.style.display=(v.note&&v.note.trim())?"inline-flex":"none";};
   let chkBadge=null;
   if(grp==="planned"){chkBadge=document.createElement("span");chkBadge.className="badge chk";}
-  function updChk(){if(!chkBadge)return;const total=CHECK_STEPS.length;const done=CHECK_STEPS.reduce((n,s)=>n+((v.checks&&v.checks[s[0]])?1:0),0);const full=done===total;chkBadge.textContent=full?("✓ "+t("ck_ready")):(done+"/"+total);chkBadge.style.color=full?cssVar("--green"):cssVar("--faint");chkBadge.style.borderColor=full?"rgba(52,211,153,.45)":cssVar("--line");}
+  function updChk(){if(!chkBadge)return;const total=CHECK_STEPS.length;const done=CHECK_STEPS.reduce((n,s)=>n+((v.checks&&v.checks[s[0]])?1:0),0);const full=done===total;if(full){chkBadge.className="badge chk ready";chkBadge.removeAttribute("title");chkBadge.removeAttribute("aria-label");chkBadge.textContent="✓ "+t("ck_ready");chkBadge.style.color=cssVar("--green");chkBadge.style.borderColor="rgba(52,211,153,.45)";}else{chkBadge.className="badge chk bar";chkBadge.style.color="";chkBadge.style.borderColor=cssVar("--line");chkBadge.title=done+"/"+total;chkBadge.setAttribute("aria-label",done+"/"+total);let h="";for(let i=0;i<total;i++)h+='<span class="seg'+(i<done?" on":"")+'"></span>';chkBadge.innerHTML=h;}}
   const chev=document.createElement("button");chev.className="chev";chev.textContent=isOpen?"⌃":"⌄";
   rtop.appendChild(idx);rtop.appendChild(dot);rtop.appendChild(title);rtop.appendChild(linkBadge);rtop.appendChild(noteBadge);if(chkBadge)rtop.appendChild(chkBadge);rtop.appendChild(chev);
   row.appendChild(rtop);

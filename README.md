@@ -20,7 +20,7 @@ Built as a single file (`index.html`) in plain JavaScript: no framework, no buil
 - Per video: **status** (to publish / published), **date**, **drag-to-reorder**, delete
 - Two sections: **Published** and **To publish** (published sorted by date)
 - Video detail:
-  - **Prep** checklist: Voiceover · SRT · Edit · Pinned comment (N/4 badge)
+  - **Prep** pipeline checklist: Script · Scenes · Voiceover · Thumbnails · Title · Cover · U.Helper. The collapsed card shows a **7-segment progress bar** that fills as steps are completed, then flips to a green **✓ Ready** badge once all 7 are done — so a half-filled bar tells you at a glance where each video is in the pipeline. Items are ordered by production sequence. (Hover/long-press the bar to see the exact `N/7` count.)
   - **YouTube link** → "Open in Studio" (rewrites the link to the Studio URL so opening it doesn't count as a view)
   - **Note** field
   - **Add to calendar · 19:00** → `.ics` file (with a 1-hour-before reminder)
@@ -96,6 +96,8 @@ If two devices (e.g. you + your editor) want to share the same board, do a **one
 - **Restore** overwrites your current data — export a backup first.
 - Get in the habit of backing up before any major change.
 
+> **Upgrading from an older version (4-item checklist):** the old prep items (Voiceover · SRT · Edit · Pinned comment) are migrated automatically. **Voiceover** is preserved; the unused old items are dropped, and the new pipeline items (Script, Scenes, Thumbnails, Title, Cover, U.Helper) start unchecked. No action needed, but exporting a backup first never hurts.
+
 ---
 
 ## 🧱 Architecture
@@ -106,6 +108,7 @@ If two devices (e.g. you + your editor) want to share the same board, do a **one
   - HTML is **network-first** (always fresh while online), other assets are **cache-first**
   - Firebase requests (gstatic SDK, googleapis, firebaseio) are bypassed/handled appropriately in the Service Worker
 - **State management**: a single `state` object; every change triggers `autosave` (debounced) to `localStorage`, and pushes to Firestore if the cloud is enabled
+- **Pipeline checklist**: the tracked steps live in one array (`CHECK_STEPS`) that is the single source of truth — the per-video `checks` object, the badge count, and the migration all derive from it, so changing the steps (count, order, labels) is a one-line edit
 - **Cloud**: Firebase Firestore with `persistentLocalCache` + `onSnapshot` (live); last-write-wins on concurrent updates
 
 ---
